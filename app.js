@@ -1,21 +1,30 @@
-// ========== WALDEMAR MESSENGER - Supabase Edition ==========
-// Онлайн мессенджер с реальным сервером (Supabase)
+// ========== WALDEMAR MESSENGER - Telegram Edition ==========
+// С настройками приватности, подарками, статусом "был в сети"
 
 // ========== SUPABASE CONFIG ==========
-// ЗАМЕНИТЕ ЭТИ ЗНАЧЕНИЯ на свои из Supabase Dashboard!
 const SUPABASE_URL = 'https://iovbirqmgpjzjcnjbqav.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_3_csJ3ON3rzeBnkvwHPk_w_FHPTUowU';
 
-// Initialize Supabase
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ========== EMOJI DATA ==========
 const emojis = {
     smileys: ['😀','😃','😄','😁','😅','😂','🤣','😊','😇','🙂','🙃','😉','😌','😍','🥰','😘','😗','😙','😚','😋','😛','😝','😜','🤪','🤨','🧐','🤓','😎','🥸','🤩','🥳','😏','😒','😞','😔','😟','😕','🙁','☹️','😣','😖','😫','😩','🥺','😢','😭','😤','😠','😡','🤬','🤯','😳','🥵','🥶','😱','😨','😰','😥','😓','🤗','🤔','🤭','🤫','🤥','😶','😐','😑','😬','🙄','😯','😦','😧','😮','😲','🥱','😴','🤤','😪','😵','🤐','🥴','🤢','🤮','🤧','😷','🤒','🤕'],
-    hearts: ['❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗','💖','💘','💝','💟','☮️','✝️','☪️','🕉','☸️','✡️','🔯','🕎','☯️','☦️','🛐','⛎','♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓','🆔','⚛️','🉑','☢️','☣️','📴','📳','🈶','🈚','🈸','🈺','🈷️','✴️','🆚','💮','🉐','㊙️','㊗️','🈴','🈵','🈹','🈲','🅰️','🅱️','🆎','🆑','🅾️','🆘','❌','⭕','🛑','⛔','📛','🚫','💯','💢','♨️','🚷','🚯','🚳','🚱','🔞','📵','🚭','❗','❕','❓','❔','‼️','⁉️','🔅','🔆','〽️','⚠️','🚸','🔱','⚜️','🔰','♻️','✅','🈯','💹','❇️','✳️','❎','🌐','💠','Ⓜ️','🌀','💤','🏧','🚾','♿','🅿️','🈳','🈂','🛂','🛃','🛄','🛅','🛗','🚹','🚺','🚼','⚧','🚻','🚮','🎦','📶','🈁','🔣','ℹ️','🔤','🔡','🔠','🆖','🆗','🆙','🆒','🆕','🆓','0️⃣','1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣','🔟','🔢','#️⃣','*️⃣','⏏️','▶️','⏸','⏯','⏹','⏺','⏭','⏮','⏩','⏪','⏫','⏬','◀️','🔼','🔽','➡️','⬅️','⬆️','⬇️','↗️','↘️','↙️','↖️','↕️','↔️','↪️','↩️','⤴️','⤵️','🔀','🔁','🔂','🔄','🔃','🎵','🎶','➕','➖','➗','✖️','💲','💱','™️','©️','®️','〰️','➰','➿','🔚','🔙','🔛','🔝','🔜','✔️','☑️','🔘','🔴','🟠','🟡','🟢','🔵','🟣','⚫','⚪','🟤','🔺','🔻','🔸','🔹','🔶','🔷','🔳','🔲','▪️','▫️','◾','◽','◼️','◻️','🟥','🟧','🟨','🟩','🟦','🟪','⬛','⬜','🟫','🔈','🔇','🔉','🔊','🔔','🔕','📣','📢','💬','💭','🗯','♠️','♣️','♥️','♦️','🃏','🎴','🀄','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚','🕛','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦','🕧'],
+    hearts: ['❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗','💖','💘','💝','💟'],
     hands: ['👋','🤚','🖐','✋','🖖','👌','🤌','🤏','✌️','🤞','🤟','🤘','🤙','👈','👉','👆','🖕','👇','☝️','👍','👎','✊','👊','🤛','🤜','👏','🙌','👐','🤲','🤝','🙏','✍️','💪','🦾','🦿','🦵','🦶','👂','🦻','👃','🧠','🫀','🫁','🦷','🦴','👀','👁','👅','👄','💋','🩸'],
     animals: ['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐻‍❄️','🐨','🐯','🦁','🐮','🐷','🐽','🐸','🐵','🙈','🙉','🙊','🐒','🐔','🐧','🐦','🐤','🐣','🐥','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋','🐌','🐞','🐜','🦟','🦗','🕷','🕸','🦂','🐢','🐍','🦎','🦖','🦕','🐙','🦑','🦐','🦞','🦀','🐡','🐠','🐟','🐬','🐳','🐋','🦈','🐊','🐅','🐆','🦓','🦍','🦧','🐘','🦛','🦏','🐪','🐫','🦒','🦘','🐃','🐂','🐄','🐎','🐖','🐏','🐑','🦙','🐐','🦌','🐕','🐩','🦮','🐕‍🦺','🐈','🐈‍⬛','🐓','🦃','🦚','🦜','🦢','🦩','🕊','🐇','🦝','🦨','🦡','🦦','🦥','🐁','🐀','🐿','🦔','🐾','🐉','🐲','🌵','🎄','🌲','🌳','🌴','🌱','🌿','☘️','🍀','🎍','🎋','🍃','🍂','🍁','🍄','🐚','🌾','💐','🌷','🌹','🥀','🌺','🌸','🌼','🌻','🌞','🌝','🌛','🌜','🌚','🌕','🌖','🌗','🌘','🌑','🌒','🌓','🌔','🌙','🌎','🌍','🌏','🪐','💫','⭐','🌟','✨','⚡','☄️','💥','🔥','🌪','🌈','☀️','🌤','⛅','🌥','☁️','🌦','🌧','⛈','🌩','🌨','❄️','☃️','⛄','🌬','💨','💧','💦','☔','☂️','🌊','🌫'],
     food: ['🍏','🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🫐','🍈','🍒','🍑','🍍','🥝','🥥','🥑','🍆','🥔','🥕','🌽','🌶','🫑','🥒','🥬','🥦','🧄','🧅','🍄','🥜','🌰','🍞','🥐','🥖','🥨','🥯','🥞','🧇','🧀','🍖','🍗','🥩','🥓','🍔','🍟','🍕','🌭','🥪','🌮','🌯','🫔','🥙','🧆','🥚','🍳','🥘','🍲','🫕','🥣','🥗','🍿','🧈','🧂','🥫','🍱','🍘','🍙','🍚','🍛','🍜','🍝','🍠','🍢','🍣','🍤','🍥','🥮','🍡','🥟','🥠','🥡','🦀','🦞','🦐','🦑','🦪','🍦','🍧','🍨','🍩','🍪','🎂','🍰','🧁','🥧','🍫','🍬','🍭','🍮','🍯','🍼','🥛','☕','🫖','🍵','🍶','🍾','🍷','🍸','🍹','🍺','🍻','🥂','🥃','🥤','🧋','🧃','🧉','🧊','🥢','🍽','🍴','🥄','🔪','🏺']
+};
+
+const gifts = {
+    rose: { emoji: '🌹', name: 'Роза' },
+    heart: { emoji: '❤️', name: 'Сердце' },
+    star: { emoji: '⭐', name: 'Звезда' },
+    crown: { emoji: '👑', name: 'Корона' },
+    trophy: { emoji: '🏆', name: 'Кубок' },
+    fire: { emoji: '🔥', name: 'Огонь' },
+    diamond: { emoji: '💎', name: 'Алмаз' },
+    rocket: { emoji: '🚀', name: 'Ракета' }
 };
 
 // ========== STATE ==========
@@ -28,6 +37,8 @@ let contextMenuOpen = null;
 let confirmCallback = null;
 let chatMenuDropdown = null;
 let editingName = false;
+let selectedGift = null;
+let userPrivacy = {};
 
 // ========== DOM ELEMENTS ==========
 const authScreen = document.getElementById('auth-screen');
@@ -66,23 +77,49 @@ const confirmOk = document.getElementById('confirm-ok');
 const clearChatBtn = document.getElementById('clear-chat-btn');
 const deleteChatBtn = document.getElementById('delete-chat-btn');
 const chatMenuBtn = document.getElementById('chat-menu-btn');
-const editNameBtn = document.getElementById('edit-name-btn');
+const giftBtn = document.getElementById('gift-btn');
+const giftModal = document.getElementById('gift-modal');
+const closeGiftBtn = document.getElementById('close-gift');
+const sendGiftBtn = document.getElementById('send-gift-btn');
 
 // ========== INIT ==========
 function init() {
-    if (SUPABASE_URL === 'https://YOUR_PROJECT_ID.supabase.co') {
-        showToast('Ошибка: Не настроен Supabase! См. инструкцию в README.txt', 'error');
-        return;
-    }
-
     setupEventListeners();
     renderEmojiGrid('smileys');
 
     const savedSession = localStorage.getItem('waldemar_session');
     if (savedSession) {
         currentUser = JSON.parse(savedSession);
+        loadPrivacySettings();
         showApp();
     }
+}
+
+// ========== PRIVACY SETTINGS ==========
+function loadPrivacySettings() {
+    const saved = localStorage.getItem('waldemar_privacy');
+    userPrivacy = saved ? JSON.parse(saved) : {
+        showOnline: true,
+        showLastSeen: true,
+        showUsername: true,
+        acceptGifts: true,
+        soundNotifications: true,
+        popupNotifications: true
+    };
+    applyPrivacySettings();
+}
+
+function savePrivacySettings() {
+    localStorage.setItem('waldemar_privacy', JSON.stringify(userPrivacy));
+}
+
+function applyPrivacySettings() {
+    document.getElementById('privacy-online').checked = userPrivacy.showOnline;
+    document.getElementById('privacy-last-seen').checked = userPrivacy.showLastSeen;
+    document.getElementById('privacy-username').checked = userPrivacy.showUsername;
+    document.getElementById('privacy-gifts').checked = userPrivacy.acceptGifts;
+    document.getElementById('notif-sound').checked = userPrivacy.soundNotifications;
+    document.getElementById('notif-popup').checked = userPrivacy.popupNotifications;
 }
 
 // ========== AUTH ==========
@@ -122,8 +159,12 @@ function updateCurrentUserUI() {
     if (!currentUser) return;
     document.getElementById('current-user-name').textContent = currentUser.name;
     document.getElementById('current-user-avatar').textContent = currentUser.avatar || currentUser.name[0].toUpperCase();
-    document.getElementById('settings-name').textContent = currentUser.name;
-    document.getElementById('settings-username').textContent = '@' + currentUser.username;
+    document.getElementById('current-user-status').textContent = userPrivacy.showOnline ? 'в сети' : 'скрыт';
+
+    document.getElementById('settings-profile-name').textContent = currentUser.name;
+    document.getElementById('settings-profile-username').textContent = '@' + currentUser.username;
+    document.getElementById('settings-avatar').textContent = currentUser.avatar || currentUser.name[0].toUpperCase();
+    document.getElementById('settings-online-status').textContent = userPrivacy.showOnline ? 'в сети' : 'недавно';
 }
 
 // ========== SUPABASE LISTENERS ==========
@@ -133,13 +174,9 @@ let contactsChannel = null;
 async function startSupabaseListeners() {
     if (!currentUser) return;
 
-    // Load all users
     await loadAllUsers();
-
-    // Load my contacts
     await loadMyContacts();
 
-    // Subscribe to users changes
     usersChannel = supabase
         .channel('users_changes')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'users' }, () => {
@@ -147,7 +184,6 @@ async function startSupabaseListeners() {
         })
         .subscribe();
 
-    // Subscribe to contacts changes
     contactsChannel = supabase
         .channel('contacts_changes_' + currentUser.id)
         .on('postgres_changes', { 
@@ -160,36 +196,38 @@ async function startSupabaseListeners() {
         })
         .subscribe();
 
-    // Update online status
     updateOnlineStatus();
+    setInterval(updateOnlineStatus, 30000);
 }
 
 function stopSupabaseListeners() {
-    if (usersChannel) {
-        supabase.removeChannel(usersChannel);
-        usersChannel = null;
-    }
-    if (contactsChannel) {
-        supabase.removeChannel(contactsChannel);
-        contactsChannel = null;
-    }
-    if (messagesSubscription) {
-        supabase.removeChannel(messagesSubscription);
-        messagesSubscription = null;
-    }
+    if (usersChannel) { supabase.removeChannel(usersChannel); usersChannel = null; }
+    if (contactsChannel) { supabase.removeChannel(contactsChannel); contactsChannel = null; }
+    if (messagesSubscription) { supabase.removeChannel(messagesSubscription); messagesSubscription = null; }
+}
+
+async function updateOnlineStatus() {
+    if (!currentUser || !userPrivacy.showOnline) return;
+    await supabase.from('users').update({ 
+        status: 'online', 
+        last_seen: new Date().toISOString() 
+    }).eq('id', currentUser.id);
+}
+
+async function setOfflineStatus() {
+    if (!currentUser) return;
+    await supabase.from('users').update({ 
+        status: 'offline', 
+        last_seen: new Date().toISOString() 
+    }).eq('id', currentUser.id);
 }
 
 async function loadAllUsers() {
     const { data, error } = await supabase.from('users').select('*');
-    if (error) {
-        console.error('Error loading users:', error);
-        return;
-    }
+    if (error) return;
     allUsers = data || [];
     renderContacts();
-    if (currentChat) {
-        updateChatHeader(currentChat);
-    }
+    if (currentChat) updateChatHeader(currentChat);
 }
 
 async function loadMyContacts() {
@@ -198,21 +236,9 @@ async function loadMyContacts() {
         .select('*, users!contacts_contact_id_fkey(*)')
         .eq('user_id', currentUser.id);
 
-    if (error) {
-        console.error('Error loading contacts:', error);
-        return;
-    }
-
+    if (error) return;
     myContacts = data || [];
     renderContacts();
-}
-
-async function updateOnlineStatus() {
-    if (!currentUser) return;
-    await supabase.from('users').update({ 
-        status: 'online', 
-        last_seen: new Date().toISOString() 
-    }).eq('id', currentUser.id);
 }
 
 // ========== AUTH TABS ==========
@@ -232,31 +258,14 @@ registerForm.addEventListener('submit', async (e) => {
     let username = document.getElementById('reg-username').value.replace('@', '').trim().toLowerCase();
     const password = document.getElementById('reg-password').value;
 
-    if (username.length < 3) {
-        showToast('Username минимум 3 символа', 'error');
-        return;
-    }
-
-    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-        showToast('Только буквы, цифры и _', 'error');
-        return;
-    }
-
-    if (password.length < 4) {
-        showToast('Пароль минимум 4 символа', 'error');
-        return;
-    }
+    if (username.length < 3) { showToast('Username минимум 3 символа', 'error'); return; }
+    if (!/^[a-zA-Z0-9_]+$/.test(username)) { showToast('Только буквы, цифры и _', 'error'); return; }
+    if (password.length < 4) { showToast('Пароль минимум 4 символа', 'error'); return; }
 
     try {
-        // Check if username exists
         const { data: existing } = await supabase.from('users').select('id').eq('username', username).single();
-        if (existing) {
-            showToast('Этот username занят', 'error');
-            return;
-        }
-    } catch {
-        // No user found - good
-    }
+        if (existing) { showToast('Этот username занят', 'error'); return; }
+    } catch {}
 
     const newUser = {
         name: name,
@@ -268,14 +277,11 @@ registerForm.addEventListener('submit', async (e) => {
     };
 
     const { data, error } = await supabase.from('users').insert(newUser).select().single();
-
-    if (error) {
-        showToast('Ошибка регистрации: ' + error.message, 'error');
-        return;
-    }
+    if (error) { showToast('Ошибка регистрации: ' + error.message, 'error'); return; }
 
     currentUser = data;
     localStorage.setItem('waldemar_session', JSON.stringify(currentUser));
+    loadPrivacySettings();
     showApp();
     showToast('Аккаунт создан!', 'success');
 });
@@ -293,13 +299,11 @@ loginForm.addEventListener('submit', async (e) => {
         .eq('password', password)
         .single();
 
-    if (error || !data) {
-        showToast('Неверный username или пароль', 'error');
-        return;
-    }
+    if (error || !data) { showToast('Неверный username или пароль', 'error'); return; }
 
     currentUser = data;
     localStorage.setItem('waldemar_session', JSON.stringify(currentUser));
+    loadPrivacySettings();
     showApp();
     showToast('Добро пожаловать, ' + data.name + '!', 'success');
 });
@@ -308,9 +312,9 @@ loginForm.addEventListener('submit', async (e) => {
 function searchUsers(query) {
     const q = query.replace('@', '').trim().toLowerCase();
     if (!q) return [];
-
     return allUsers.filter(u => {
         if (u.id === currentUser?.id) return false;
+        if (!userPrivacy.showUsername && u.id !== currentUser?.id) return false;
         return u.username.toLowerCase().includes(q) || u.name.toLowerCase().includes(q);
     });
 }
@@ -320,7 +324,6 @@ function performSearch() {
     const results = searchUsers(query);
 
     searchResultsList.innerHTML = '';
-
     if (results.length === 0) {
         searchResultsList.innerHTML = '<div class="no-results">Пользователи не найдены</div>';
     } else {
@@ -332,7 +335,7 @@ function performSearch() {
                 <div class="user-avatar ${user.status === 'offline' ? 'offline' : ''}">${user.avatar}</div>
                 <div class="contact-info">
                     <div class="contact-name">${user.name} <span class="contact-username">@${user.username}</span></div>
-                    <div class="contact-preview">${formatLastSeen(user.last_seen) || 'в сети'}</div>
+                    <div class="contact-preview">${formatLastSeen(user.last_seen, user.status)}</div>
                 </div>
                 ${isContact 
                     ? `<button class="contact-add-btn" onclick="openChat('${user.id}')">Написать</button>`
@@ -342,7 +345,6 @@ function performSearch() {
             searchResultsList.appendChild(div);
         });
     }
-
     searchResults.classList.remove('hidden');
     contactsSection.classList.add('hidden');
 }
@@ -350,40 +352,24 @@ function performSearch() {
 searchBtn.addEventListener('click', performSearch);
 searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') performSearch(); });
 searchInput.addEventListener('input', () => {
-    if (!searchInput.value.trim()) {
-        searchResults.classList.add('hidden');
-        contactsSection.classList.remove('hidden');
-    }
+    if (!searchInput.value.trim()) { searchResults.classList.add('hidden'); contactsSection.classList.remove('hidden'); }
 });
 closeSearchBtn.addEventListener('click', () => {
-    searchResults.classList.add('hidden');
-    contactsSection.classList.remove('hidden');
-    searchInput.value = '';
+    searchResults.classList.add('hidden'); contactsSection.classList.remove('hidden'); searchInput.value = '';
 });
 
 // ========== CONTACTS ==========
 async function addContact(userId) {
     if (!currentUser || myContacts.find(c => c.contact_id === userId)) return;
-
     const chatId = [currentUser.id, userId].sort().join('_');
 
-    // Add to my contacts
     const { error: error1 } = await supabase.from('contacts').insert({
-        user_id: currentUser.id,
-        contact_id: userId,
-        chat_id: chatId
+        user_id: currentUser.id, contact_id: userId, chat_id: chatId
     });
+    if (error1) { showToast('Ошибка: ' + error1.message, 'error'); return; }
 
-    if (error1) {
-        showToast('Ошибка: ' + error1.message, 'error');
-        return;
-    }
-
-    // Add to their contacts
     await supabase.from('contacts').insert({
-        user_id: userId,
-        contact_id: currentUser.id,
-        chat_id: chatId
+        user_id: userId, contact_id: currentUser.id, chat_id: chatId
     });
 
     showToast('Контакт добавлен!', 'success');
@@ -392,15 +378,8 @@ async function addContact(userId) {
 
 async function removeContact(userId) {
     if (!currentUser) return;
-
-    await supabase.from('contacts').delete()
-        .eq('user_id', currentUser.id)
-        .eq('contact_id', userId);
-
-    if (currentChat === userId) {
-        showEmptyState();
-    }
-
+    await supabase.from('contacts').delete().eq('user_id', currentUser.id).eq('contact_id', userId);
+    if (currentChat === userId) showEmptyState();
     showToast('Чат удален', 'info');
     closeContextMenu();
     await loadMyContacts();
@@ -408,16 +387,10 @@ async function removeContact(userId) {
 
 async function clearChatMessages(userId) {
     if (!currentUser) return;
-
     const contact = myContacts.find(c => c.contact_id === userId);
     if (!contact) return;
-
     await supabase.from('messages').delete().eq('chat_id', contact.chat_id);
-
-    if (currentChat === userId) {
-        renderMessages([]);
-    }
-
+    if (currentChat === userId) renderMessages([]);
     showToast('История очищена', 'info');
     closeContextMenu();
 }
@@ -443,7 +416,7 @@ function renderContacts() {
             <div class="user-avatar ${user.status === 'offline' ? 'offline' : ''}">${user.avatar}</div>
             <div class="contact-info">
                 <div class="contact-name">${user.name}</div>
-                <div class="contact-preview">Нажмите, чтобы открыть чат</div>
+                <div class="contact-preview">${formatLastSeen(user.last_seen, user.status)}</div>
             </div>
             <div class="contact-meta">
                 <span class="contact-time"></span>
@@ -458,17 +431,36 @@ function renderContacts() {
     });
 }
 
+// ========== LAST SEEN FORMATTING ==========
+function formatLastSeen(lastSeen, status) {
+    if (status === 'online') return 'в сети';
+    if (!lastSeen) return 'недавно';
+
+    try {
+        const date = new Date(lastSeen);
+        const now = new Date();
+        const diff = Math.floor((now - date) / 1000);
+
+        if (diff < 60) return 'только что';
+        if (diff < 3600) return `${Math.floor(diff / 60)} мин назад`;
+        if (diff < 7200) return '1 час назад';
+        if (diff < 86400) return `${Math.floor(diff / 3600)} ч назад`;
+        if (diff < 172800) return 'вчера';
+        if (diff < 604800) return `${Math.floor(diff / 86400)} дн назад`;
+
+        return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+    } catch {
+        return 'недавно';
+    }
+}
+
 // ========== CONTEXT MENU ==========
 function toggleContactMenu(userId, btn) {
     if (contextMenuOpen) {
         const existing = document.querySelector('.context-menu');
         if (existing) existing.remove();
-        if (contextMenuOpen === userId) {
-            contextMenuOpen = null;
-            return;
-        }
+        if (contextMenuOpen === userId) { contextMenuOpen = null; return; }
     }
-
     contextMenuOpen = userId;
 
     const menu = document.createElement('div');
@@ -484,7 +476,6 @@ function toggleContactMenu(userId, btn) {
             <i class="fas fa-trash"></i> Удалить чат
         </div>
     `;
-
     btn.parentElement.appendChild(menu);
 }
 
@@ -504,42 +495,23 @@ function showConfirm(title, text, onConfirm) {
 
 function showConfirmDeleteChat(userId) {
     const user = allUsers.find(u => u.id === userId);
-    showConfirm(
-        'Удалить чат?',
-        `Чат с ${user?.name || 'пользователем'} будет удален из списка.`,
-        () => removeContact(userId)
-    );
+    showConfirm('Удалить чат?', `Чат с ${user?.name || 'пользователем'} будет удален.`, () => removeContact(userId));
     closeContextMenu();
 }
 
 function showConfirmClearChat() {
     if (!currentChat) return;
     const user = allUsers.find(u => u.id === currentChat);
-    showConfirm(
-        'Очистить историю?',
-        `Все сообщения с ${user?.name || 'пользователем'} будут удалены.`,
-        () => clearChatMessages(currentChat)
-    );
+    showConfirm('Очистить историю?', `Все сообщения с ${user?.name || 'пользователем'} будут удалены.`, () => clearChatMessages(currentChat));
 }
 
-confirmCancel.addEventListener('click', () => {
-    confirmModal.classList.add('hidden');
-    confirmCallback = null;
-});
-
+confirmCancel.addEventListener('click', () => { confirmModal.classList.add('hidden'); confirmCallback = null; });
 confirmOk.addEventListener('click', () => {
-    if (confirmCallback) {
-        confirmCallback();
-        confirmCallback = null;
-    }
+    if (confirmCallback) { confirmCallback(); confirmCallback = null; }
     confirmModal.classList.add('hidden');
 });
-
 confirmModal.addEventListener('click', (e) => {
-    if (e.target === confirmModal) {
-        confirmModal.classList.add('hidden');
-        confirmCallback = null;
-    }
+    if (e.target === confirmModal) { confirmModal.classList.add('hidden'); confirmCallback = null; }
 });
 
 // ========== CHAT ==========
@@ -554,7 +526,6 @@ async function openChat(userId) {
     const contact = myContacts.find(c => c.contact_id === userId);
     if (!contact) return;
 
-    // Load existing messages
     const { data: messages } = await supabase
         .from('messages')
         .select('*')
@@ -563,22 +534,17 @@ async function openChat(userId) {
 
     renderMessages(messages || []);
 
-    // Subscribe to new messages
-    if (messagesSubscription) {
-        supabase.removeChannel(messagesSubscription);
-    }
+    if (messagesSubscription) supabase.removeChannel(messagesSubscription);
 
     messagesSubscription = supabase
         .channel('messages_' + contact.chat_id)
         .on('postgres_changes', {
-            event: 'INSERT',
-            schema: 'public',
-            table: 'messages',
+            event: 'INSERT', schema: 'public', table: 'messages',
             filter: 'chat_id=eq.' + contact.chat_id
         }, (payload) => {
-            const msg = payload.new;
-            appendMessage(msg);
+            appendMessage(payload.new);
             scrollToBottom();
+            if (userPrivacy.popupNotifications) showToast('Новое сообщение от ' + user.name, 'info');
         })
         .subscribe();
 
@@ -592,39 +558,45 @@ async function openChat(userId) {
 function updateChatHeader(userId) {
     const user = allUsers.find(u => u.id === userId);
     if (!user) return;
-
     document.getElementById('chat-name').textContent = user.name;
     document.getElementById('chat-avatar').textContent = user.avatar;
-    document.getElementById('chat-status').textContent = formatLastSeen(user.last_seen) || 'в сети';
+    document.getElementById('chat-status').textContent = formatLastSeen(user.last_seen, user.status);
     document.getElementById('chat-status').className = `user-status ${user.status === 'offline' ? 'offline' : ''}`;
 }
 
 function renderMessages(msgs) {
     messagesList.innerHTML = '';
-
     if (!msgs || msgs.length === 0) {
         messagesList.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:40px;">Нет сообщений. Напишите первым!</div>';
         return;
     }
-
     msgs.forEach(msg => appendMessage(msg));
     scrollToBottom();
 }
 
 function appendMessage(msg) {
     const isSent = msg.sender_id === currentUser.id;
+    const isGift = msg.is_gift;
     const div = document.createElement('div');
-    div.className = `message ${isSent ? 'sent' : 'received'}`;
 
-    const time = new Date(msg.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-
-    div.innerHTML = `
-        ${escapeHtml(msg.text)}
-        <div class="message-time">
-            ${time}
-            ${isSent ? `<span class="message-status">✓</span>` : ''}
-        </div>
-    `;
+    if (isGift) {
+        div.className = 'message gift-message';
+        const giftData = gifts[msg.gift_type] || { emoji: '🎁', name: 'Подарок' };
+        div.innerHTML = `
+            <span class="gift-emoji-big">${giftData.emoji}</span>
+            <div class="gift-text">${isSent ? 'Вы отправили' : 'Получено'}: ${giftData.name}</div>
+            <div class="message-time">${new Date(msg.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}</div>
+        `;
+    } else {
+        div.className = `message ${isSent ? 'sent' : 'received'}`;
+        div.innerHTML = `
+            ${escapeHtml(msg.text)}
+            <div class="message-time">
+                ${new Date(msg.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
+                ${isSent ? '<span class="message-status">✓</span>' : ''}
+            </div>
+        `;
+    }
     messagesList.appendChild(div);
 }
 
@@ -649,31 +621,73 @@ async function sendMessage() {
     const msg = {
         chat_id: contact.chat_id,
         sender_id: currentUser.id,
-        text: text
+        text: text,
+        is_gift: false
     };
 
     const { error } = await supabase.from('messages').insert(msg);
-
-    if (error) {
-        showToast('Ошибка отправки: ' + error.message, 'error');
-        return;
-    }
-
+    if (error) { showToast('Ошибка отправки: ' + error.message, 'error'); return; }
     messageInput.value = '';
 }
 
 sendBtn.addEventListener('click', sendMessage);
 messageInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+
+// ========== GIFT SYSTEM ==========
+giftBtn.addEventListener('click', () => {
+    if (!currentChat) return;
+    const user = allUsers.find(u => u.id === currentChat);
+    if (!user) return;
+
+    document.getElementById('gift-avatar').textContent = user.avatar;
+    document.getElementById('gift-username').textContent = user.name;
+    giftModal.classList.remove('hidden');
+    selectedGift = null;
+    document.querySelectorAll('.gift-item').forEach(item => item.classList.remove('selected'));
+});
+
+closeGiftBtn.addEventListener('click', () => {
+    giftModal.classList.add('hidden');
+    selectedGift = null;
+});
+
+document.querySelectorAll('.gift-item').forEach(item => {
+    item.addEventListener('click', () => {
+        document.querySelectorAll('.gift-item').forEach(i => i.classList.remove('selected'));
+        item.classList.add('selected');
+        selectedGift = item.dataset.gift;
+    });
+});
+
+sendGiftBtn.addEventListener('click', async () => {
+    if (!selectedGift || !currentChat || !currentUser) {
+        showToast('Выберите подарок', 'error');
+        return;
     }
+
+    const contact = myContacts.find(c => c.contact_id === currentChat);
+    if (!contact) return;
+
+    const msg = {
+        chat_id: contact.chat_id,
+        sender_id: currentUser.id,
+        text: 'Подарок: ' + (gifts[selectedGift]?.name || 'Подарок'),
+        is_gift: true,
+        gift_type: selectedGift
+    };
+
+    const { error } = await supabase.from('messages').insert(msg);
+    if (error) { showToast('Ошибка отправки подарка', 'error'); return; }
+
+    giftModal.classList.add('hidden');
+    selectedGift = null;
+    showToast('Подарок отправлен!', 'success');
 });
 
 // ========== EMOJI PICKER ==========
-emojiBtn.addEventListener('click', () => {
-    emojiPicker.classList.toggle('hidden');
-});
+emojiBtn.addEventListener('click', () => { emojiPicker.classList.toggle('hidden'); });
 
 emojiCats.forEach(cat => {
     cat.addEventListener('click', () => {
@@ -690,10 +704,7 @@ function renderEmojiGrid(category) {
         const span = document.createElement('span');
         span.className = 'emoji-item';
         span.textContent = emoji;
-        span.addEventListener('click', () => {
-            messageInput.value += emoji;
-            messageInput.focus();
-        });
+        span.addEventListener('click', () => { messageInput.value += emoji; messageInput.focus(); });
         emojiGrid.appendChild(span);
     });
 }
@@ -709,23 +720,17 @@ document.addEventListener('click', (e) => {
         chatMenuDropdown.remove();
         chatMenuDropdown = null;
     }
+    if (!giftModal.contains(e.target) && e.target !== giftBtn && !giftBtn.contains(e.target)) {
+        giftModal.classList.add('hidden');
+    }
 });
 
 // ========== CHAT ACTIONS ==========
 clearChatBtn.addEventListener('click', showConfirmClearChat);
-
-deleteChatBtn.addEventListener('click', () => {
-    if (currentChat) {
-        showConfirmDeleteChat(currentChat);
-    }
-});
+deleteChatBtn.addEventListener('click', () => { if (currentChat) showConfirmDeleteChat(currentChat); });
 
 chatMenuBtn.addEventListener('click', () => {
-    if (chatMenuDropdown) {
-        chatMenuDropdown.remove();
-        chatMenuDropdown = null;
-        return;
-    }
+    if (chatMenuDropdown) { chatMenuDropdown.remove(); chatMenuDropdown = null; return; }
 
     chatMenuDropdown = document.createElement('div');
     chatMenuDropdown.className = 'chat-menu-dropdown';
@@ -737,122 +742,75 @@ chatMenuBtn.addEventListener('click', () => {
             <i class="fas fa-trash"></i> Удалить чат
         </div>
     `;
-
     chatHeader.appendChild(chatMenuDropdown);
 });
 
-// ========== SETTINGS ==========
+// ========== SETTINGS (Telegram-style) ==========
 settingsBtn.addEventListener('click', () => {
     updateCurrentUserUI();
     settingsModal.classList.remove('hidden');
 });
 
-closeSettingsBtn.addEventListener('click', () => {
-    settingsModal.classList.add('hidden');
+closeSettingsBtn.addEventListener('click', () => { settingsModal.classList.add('hidden'); });
+settingsModal.addEventListener('click', (e) => { if (e.target === settingsModal) settingsModal.classList.add('hidden'); });
+
+// Privacy toggles
+document.getElementById('privacy-online').addEventListener('change', async (e) => {
+    userPrivacy.showOnline = e.target.checked;
+    savePrivacySettings();
+    updateCurrentUserUI();
+    if (currentUser) {
+        await supabase.from('users').update({ status: userPrivacy.showOnline ? 'online' : 'offline' }).eq('id', currentUser.id);
+    }
+    showToast(userPrivacy.showOnline ? 'Статус "в сети" виден' : 'Статус скрыт', 'info');
 });
 
-settingsModal.addEventListener('click', (e) => {
-    if (e.target === settingsModal) {
-        settingsModal.classList.add('hidden');
-    }
+document.getElementById('privacy-last-seen').addEventListener('change', (e) => {
+    userPrivacy.showLastSeen = e.target.checked;
+    savePrivacySettings();
+    showToast(userPrivacy.showLastSeen ? '"Был в сети" видно' : '"Был в сети" скрыто', 'info');
+});
+
+document.getElementById('privacy-username').addEventListener('change', (e) => {
+    userPrivacy.showUsername = e.target.checked;
+    savePrivacySettings();
+    showToast(userPrivacy.showUsername ? 'Вас можно найти по username' : 'Username скрыт из поиска', 'info');
+});
+
+document.getElementById('privacy-gifts').addEventListener('change', (e) => {
+    userPrivacy.acceptGifts = e.target.checked;
+    savePrivacySettings();
+    showToast(userPrivacy.acceptGifts ? 'Подарки включены' : 'Подарки отключены', 'info');
+});
+
+document.getElementById('notif-sound').addEventListener('change', (e) => {
+    userPrivacy.soundNotifications = e.target.checked;
+    savePrivacySettings();
+    showToast(userPrivacy.soundNotifications ? 'Звук включен' : 'Звук отключен', 'info');
+});
+
+document.getElementById('notif-popup').addEventListener('change', (e) => {
+    userPrivacy.popupNotifications = e.target.checked;
+    savePrivacySettings();
+    showToast(userPrivacy.popupNotifications ? 'Уведомления включены' : 'Уведомления отключены', 'info');
 });
 
 logoutBtn.addEventListener('click', () => {
-    showConfirm(
-        'Выйти из аккаунта?',
-        'Вы сможете войти снова используя свой username и пароль.',
-        () => {
-            if (currentUser) {
-                supabase.from('users').update({ status: 'offline' }).eq('id', currentUser.id);
-            }
-            showAuth();
-            settingsModal.classList.add('hidden');
-            showToast('Вы вышли из аккаунта', 'info');
-        }
-    );
-});
-
-// Edit name
-editNameBtn.addEventListener('click', () => {
-    if (editingName || !currentUser) return;
-    editingName = true;
-
-    const nameSpan = document.getElementById('settings-name');
-    const currentName = nameSpan.textContent;
-
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = currentName;
-    input.maxLength = 30;
-
-    const parent = nameSpan.parentElement;
-    nameSpan.style.display = 'none';
-    parent.insertBefore(input, editNameBtn);
-    input.focus();
-    input.select();
-
-    async function saveName() {
-        const newName = input.value.trim();
-        if (newName && newName !== currentName && currentUser) {
-            const { error } = await supabase.from('users').update({
-                name: newName,
-                avatar: newName[0].toUpperCase()
-            }).eq('id', currentUser.id);
-
-            if (error) {
-                showToast('Ошибка: ' + error.message, 'error');
-            } else {
-                currentUser.name = newName;
-                currentUser.avatar = newName[0].toUpperCase();
-                localStorage.setItem('waldemar_session', JSON.stringify(currentUser));
-                updateCurrentUserUI();
-                renderContacts();
-                showToast('Имя обновлено!', 'success');
-            }
-        }
-        input.remove();
-        nameSpan.style.display = '';
-        editingName = false;
-    }
-
-    input.addEventListener('blur', saveName);
-    input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') input.blur();
-        if (e.key === 'Escape') {
-            input.value = currentName;
-            input.blur();
-        }
+    showConfirm('Выйти из аккаунта?', 'Вы сможете войти снова.', () => {
+        setOfflineStatus();
+        showAuth();
+        settingsModal.classList.add('hidden');
+        showToast('Вы вышли из аккаунта', 'info');
     });
 });
-
-// ========== UTILS ==========
-function formatLastSeen(lastSeen) {
-    if (!lastSeen) return 'в сети';
-
-    try {
-        const date = new Date(lastSeen);
-        const now = new Date();
-        const diff = Math.floor((now - date) / 1000);
-
-        if (diff < 60) return 'только что';
-        if (diff < 3600) return `${Math.floor(diff / 60)} мин назад`;
-        if (diff < 86400) return `${Math.floor(diff / 3600)} ч назад`;
-        if (diff < 604800) return `${Math.floor(diff / 86400)} дн назад`;
-        return date.toLocaleDateString('ru-RU');
-    } catch {
-        return lastSeen;
-    }
-}
 
 // ========== TOAST ==========
 function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-
     const icons = { success: '✓', error: '✕', info: 'ℹ' };
     toast.innerHTML = `<span>${icons[type]}</span> ${escapeHtml(message)}`;
     toastContainer.appendChild(toast);
-
     setTimeout(() => {
         toast.style.opacity = '0';
         toast.style.transform = 'translateX(20px)';
