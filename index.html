@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WALDEMAR Messenger</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<base target="_blank">
+</head>
+<body>
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="auth-screen">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <div class="logo-icon">W</div>
+                <h1>WALDEMAR</h1>
+                <p>Онлайн мессенджер для друзей</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Вход</button>
+                <button class="auth-tab" data-tab="register">Регистрация</button>
+            </div>
+
+            <form id="login-form" class="auth-form active">
+                <div class="input-group">
+                    <i class="fas fa-at"></i>
+                    <input type="text" id="login-username" placeholder="@username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login-password" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="auth-btn">Войти</button>
+            </form>
+
+            <form id="register-form" class="auth-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="reg-name" placeholder="Имя" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-at"></i>
+                    <input type="text" id="reg-username" placeholder="@username" required>
+                    <small class="input-hint">Минимум 3 символа, только буквы, цифры и _</small>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="reg-password" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="auth-btn">Создать аккаунт</button>
+            </form>
+        </div>
+        <div class="auth-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="app hidden">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="user-info">
+                    <div class="user-avatar" id="current-user-avatar">W</div>
+                    <div class="user-details">
+                        <span class="user-name" id="current-user-name">Waldemar</span>
+                        <span class="user-status" id="current-user-status">в сети</span>
+                    </div>
+                </div>
+                <button class="btn-icon" id="settings-btn"><i class="fas fa-cog"></i></button>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Поиск по @username...">
+                <button class="btn-icon search-btn" id="search-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+
+            <div id="search-results" class="search-results hidden">
+                <div class="search-results-header">
+                    <span>Результаты поиска</span>
+                    <button class="btn-icon" id="close-search"><i class="fas fa-times"></i></button>
+                </div>
+                <div id="search-results-list" class="contacts-list"></div>
+            </div>
+
+            <div id="contacts-section" class="contacts-section">
+                <div class="contacts-header">
+                    <span>Чаты</span>
+                    <span class="contacts-count" id="contacts-count">0</span>
+                </div>
+                <div id="contacts-list" class="contacts-list"></div>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <div id="empty-state" class="empty-state">
+                <div class="empty-icon"><i class="fas fa-comments"></i></div>
+                <h3>Выберите чат</h3>
+                <p>Найдите друга по @username и начните общение</p>
+            </div>
+
+            <div class="chat-header hidden" id="chat-header">
+                <div class="chat-user-info">
+                    <div class="user-avatar" id="chat-avatar">A</div>
+                    <div class="user-details">
+                        <span class="user-name" id="chat-name"></span>
+                        <span class="user-status" id="chat-status"></span>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="btn-icon" id="clear-chat-btn" title="Очистить чат"><i class="fas fa-eraser"></i></button>
+                    <button class="btn-icon" id="delete-chat-btn" title="Удалить чат"><i class="fas fa-trash"></i></button>
+                    <button class="btn-icon" id="chat-menu-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+
+            <div class="messages-container hidden" id="messages-container">
+                <div class="messages-date">Сегодня</div>
+                <div id="messages-list" class="messages-list"></div>
+            </div>
+
+            <div class="input-area hidden" id="input-area">
+                <button class="btn-icon" id="attach-btn"><i class="fas fa-paperclip"></i></button>
+                <div class="message-input-wrapper">
+                    <input type="text" id="message-input" placeholder="Напишите сообщение...">
+                    <button class="btn-icon emoji-btn" id="emoji-btn"><i class="far fa-smile"></i></button>
+                </div>
+                <button class="btn-icon send-btn" id="send-btn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+
+            <div id="emoji-picker" class="emoji-picker hidden">
+                <div class="emoji-categories">
+                    <button class="emoji-cat active" data-cat="smileys">😀</button>
+                    <button class="emoji-cat" data-cat="hearts">❤️</button>
+                    <button class="emoji-cat" data-cat="hands">👋</button>
+                    <button class="emoji-cat" data-cat="animals">🐱</button>
+                    <button class="emoji-cat" data-cat="food">🍕</button>
+                </div>
+                <div id="emoji-grid" class="emoji-grid"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Настройки</h3>
+                <button class="btn-icon" id="close-settings"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h4>Профиль</h4>
+                    <div class="settings-item editable">
+                        <span>Имя</span>
+                        <div class="settings-edit">
+                            <span id="settings-name"></span>
+                            <button class="btn-icon small" id="edit-name-btn"><i class="fas fa-pen"></i></button>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <span>Username</span>
+                        <span id="settings-username"></span>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h4>Аккаунт</h4>
+                    <button class="settings-btn danger" id="logout-btn">Выйти из аккаунта</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div id="confirm-modal" class="modal hidden">
+        <div class="modal-content confirm-content">
+            <div class="confirm-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3 id="confirm-title">Подтвердите действие</h3>
+            <p id="confirm-text">Вы уверены?</p>
+            <div class="confirm-actions">
+                <button class="confirm-btn cancel" id="confirm-cancel">Отмена</button>
+                <button class="confirm-btn danger" id="confirm-ok">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
