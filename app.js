@@ -3,7 +3,7 @@
 
 // ========== SUPABASE CONFIG ==========
 // ЗАМЕНИТЕ ЭТИ ЗНАЧЕНИЯ на свои из Supabase Dashboard!
-const SUPABASE_URL = 'https://arsengevorgyan797.supabase.co';
+const SUPABASE_URL = 'https://iovbirqmgpjzjcnjbqav.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_3_csJ3ON3rzeBnkvwHPk_w_FHPTUowU';
 
 // Initialize Supabase
