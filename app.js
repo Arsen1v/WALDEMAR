@@ -576,7 +576,7 @@ function renderMessages(msgs) {
 
 function appendMessage(msg) {
     const isSent = msg.sender_id === currentUser.id;
-    const isGift = msg.is_gift;
+    const isGift = msg.text && msg.text.startsWith('🎁 ПОДАРОК:');
     const div = document.createElement('div');
 
     if (isGift) {
@@ -666,21 +666,22 @@ sendGiftBtn.addEventListener('click', async () => {
         showToast('Выберите подарок', 'error');
         return;
     }
-
+    
     const contact = myContacts.find(c => c.contact_id === currentChat);
     if (!contact) return;
-
+    
+    const giftData = gifts[selectedGift] || { emoji: '🎁', name: 'Подарок' };
+    const giftText = '🎁 ПОДАРОК: ' + giftData.emoji + ' ' + giftData.name + ' от ' + currentUser.name;
+    
     const msg = {
         chat_id: contact.chat_id,
         sender_id: currentUser.id,
-        text: 'Подарок: ' + (gifts[selectedGift]?.name || 'Подарок'),
-        is_gift: true,
-        gift_type: selectedGift
+        text: giftText
     };
-
+    
     const { error } = await supabase.from('messages').insert(msg);
-    if (error) { showToast('Ошибка отправки подарка', 'error'); return; }
-
+    if (error) { showToast('Ошибка отправки: ' + error.message, 'error'); return; }
+    
     giftModal.classList.add('hidden');
     selectedGift = null;
     showToast('Подарок отправлен!', 'success');
