@@ -16,7 +16,7 @@
             <div class="auth-logo">
                 <div class="logo-icon">W</div>
                 <h1>WALDEMAR</h1>
-                <p>Онлайн мессенджер для друзей</p>
+                <p>Безопасный мессенджер для друзей</p>
             </div>
 
             <div class="auth-tabs">
@@ -44,7 +44,7 @@
                 <div class="input-group">
                     <i class="fas fa-at"></i>
                     <input type="text" id="reg-username" placeholder="@username" required>
-                    <small class="input-hint">Минимум 3 символа, только буквы, цифры и _</small>
+                    <small class="input-hint">Минимум 3 символа</small>
                 </div>
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
@@ -113,6 +113,7 @@
                     </div>
                 </div>
                 <div class="chat-actions">
+                    <button class="btn-icon" id="gift-btn" title="Подарить подарок"><i class="fas fa-gift"></i></button>
                     <button class="btn-icon" id="clear-chat-btn" title="Очистить чат"><i class="fas fa-eraser"></i></button>
                     <button class="btn-icon" id="delete-chat-btn" title="Удалить чат"><i class="fas fa-trash"></i></button>
                     <button class="btn-icon" id="chat-menu-btn"><i class="fas fa-ellipsis-v"></i></button>
@@ -146,32 +147,132 @@
         </main>
     </div>
 
-    <!-- Settings Modal -->
+    <!-- Settings Modal (Telegram-style) -->
     <div id="settings-modal" class="modal hidden">
-        <div class="modal-content">
+        <div class="modal-content settings-modal-content">
             <div class="modal-header">
                 <h3>Настройки</h3>
                 <button class="btn-icon" id="close-settings"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
-                <div class="settings-section">
-                    <h4>Профиль</h4>
-                    <div class="settings-item editable">
-                        <span>Имя</span>
-                        <div class="settings-edit">
-                            <span id="settings-name"></span>
-                            <button class="btn-icon small" id="edit-name-btn"><i class="fas fa-pen"></i></button>
-                        </div>
-                    </div>
-                    <div class="settings-item">
-                        <span>Username</span>
-                        <span id="settings-username"></span>
+                <!-- Profile Section -->
+                <div class="settings-profile">
+                    <div class="settings-avatar" id="settings-avatar">W</div>
+                    <div class="settings-profile-info">
+                        <h4 id="settings-profile-name">Waldemar</h4>
+                        <span id="settings-profile-username">@waldemar</span>
+                        <span class="online-status" id="settings-online-status">в сети</span>
                     </div>
                 </div>
+
+                <!-- Privacy Settings -->
                 <div class="settings-section">
-                    <h4>Аккаунт</h4>
+                    <h4><i class="fas fa-shield-alt"></i> Конфиденциальность</h4>
+
+                    <div class="settings-item toggle-item">
+                        <div class="settings-item-info">
+                            <span>Показывать статус "в сети"</span>
+                            <small>Видно, когда вы были в сети</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="privacy-online" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-item toggle-item">
+                        <div class="settings-item-info">
+                            <span>Показывать "был(а) в сети"</span>
+                            <small>Видно последнее время входа</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="privacy-last-seen" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-item toggle-item">
+                        <div class="settings-item-info">
+                            <span>Показывать никнейм в поиске</span>
+                            <small>Могут найти по @username</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="privacy-username" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-item toggle-item">
+                        <div class="settings-item-info">
+                            <span>Принимать подарки</span>
+                            <small>Друзья могут отправлять подарки</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="privacy-gifts" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="settings-section">
+                    <h4><i class="fas fa-bell"></i> Уведомления</h4>
+
+                    <div class="settings-item toggle-item">
+                        <div class="settings-item-info">
+                            <span>Звуковые уведомления</span>
+                            <small>Звук при новом сообщении</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="notif-sound" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-item toggle-item">
+                        <div class="settings-item-info">
+                            <span>Всплывающие уведомления</span>
+                            <small>Показывать уведомления на экране</small>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="notif-popup" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Account -->
+                <div class="settings-section">
+                    <h4><i class="fas fa-user-cog"></i> Аккаунт</h4>
                     <button class="settings-btn danger" id="logout-btn">Выйти из аккаунта</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Modal -->
+    <div id="gift-modal" class="modal hidden">
+        <div class="modal-content gift-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-gift"></i> Подарить подарок</h3>
+                <button class="btn-icon" id="close-gift"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="gift-user-info">
+                    <div class="user-avatar" id="gift-avatar">A</div>
+                    <span id="gift-username">Другу</span>
+                </div>
+                <div class="gifts-grid">
+                    <div class="gift-item" data-gift="rose"><span class="gift-emoji">🌹</span><span class="gift-name">Роза</span></div>
+                    <div class="gift-item" data-gift="heart"><span class="gift-emoji">❤️</span><span class="gift-name">Сердце</span></div>
+                    <div class="gift-item" data-gift="star"><span class="gift-emoji">⭐</span><span class="gift-name">Звезда</span></div>
+                    <div class="gift-item" data-gift="crown"><span class="gift-emoji">👑</span><span class="gift-name">Корона</span></div>
+                    <div class="gift-item" data-gift="trophy"><span class="gift-emoji">🏆</span><span class="gift-name">Кубок</span></div>
+                    <div class="gift-item" data-gift="fire"><span class="gift-emoji">🔥</span><span class="gift-name">Огонь</span></div>
+                    <div class="gift-item" data-gift="diamond"><span class="gift-emoji">💎</span><span class="gift-name">Алмаз</span></div>
+                    <div class="gift-item" data-gift="rocket"><span class="gift-emoji">🚀</span><span class="gift-name">Ракета</span></div>
+                </div>
+                <button class="auth-btn" id="send-gift-btn">Отправить подарок</button>
             </div>
         </div>
     </div>
@@ -191,7 +292,6 @@
 
     <div id="toast-container" class="toast-container"></div>
 
-    <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
     <script src="app.js"></script>
 </body>
