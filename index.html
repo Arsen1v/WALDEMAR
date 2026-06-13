@@ -1,362 +1,460 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WALDEMAR Messenger</title>
-<link rel="stylesheet" href="styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WALDEMAR — Messenger</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
-<div id="auth-screen" class="auth-screen">
-<div class="auth-bg">
-<div class="blob blob-1"></div>
-<div class="blob blob-2"></div>
-<div class="blob blob-3"></div>
-</div>
-<div class="auth-card">
-<div class="auth-brand">
-<div class="brand-logo">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-</svg>
-</div>
-<h1>WALDEMAR</h1>
-<p>Безопасный мессенджер нового поколения</p>
-</div>
-<div class="auth-tabs">
-<button class="auth-tab active" data-tab="login">Вход</button>
-<button class="auth-tab" data-tab="register">Регистрация</button>
-</div>
-<form id="login-form" class="auth-form active">
-<div class="field">
-<i class="fas fa-at"></i>
-<input type="text" id="login-username" placeholder="@username" required>
-</div>
-<div class="field">
-<i class="fas fa-lock"></i>
-<input type="password" id="login-password" placeholder="Пароль" required>
-</div>
-<button type="submit" class="btn-primary">
-<span>Войти</span>
-<i class="fas fa-arrow-right"></i>
-</button>
-</form>
-<form id="register-form" class="auth-form">
-<div class="field">
-<i class="fas fa-user"></i>
-<input type="text" id="reg-name" placeholder="Ваше имя" required>
-</div>
-<div class="field">
-<i class="fas fa-at"></i>
-<input type="text" id="reg-username" placeholder="@username" required>
-<span class="hint">Минимум 3 символа</span>
-</div>
-<div class="field">
-<i class="fas fa-lock"></i>
-<input type="password" id="reg-password" placeholder="Пароль" required>
-<span class="hint">Минимум 4 символа</span>
-</div>
-<button type="submit" class="btn-primary">
-<span>Создать аккаунт</span>
-<i class="fas fa-arrow-right"></i>
-</button>
-</form>
-</div>
-</div>
+    <div id="auth-screen" class="auth-screen">
+        <div class="auth-bg">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+        <div class="auth-card">
+            <div class="auth-brand">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                </div>
+                <h1>WALDEMAR</h1>
+                <p>Безопасный мессенджер нового поколения</p>
+            </div>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Вход</button>
+                <button class="auth-tab" data-tab="register">Регистрация</button>
+            </div>
+            <form id="login-form" class="auth-form active">
+                <div class="field">
+                    <i class="fas fa-at"></i>
+                    <input type="text" id="login-username" placeholder="@username" required>
+                </div>
+                <div class="field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login-password" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <span>Войти</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+            <form id="register-form" class="auth-form">
+                <div class="field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="reg-name" placeholder="Ваше имя" required>
+                </div>
+                <div class="field">
+                    <i class="fas fa-at"></i>
+                    <input type="text" id="reg-username" placeholder="@username" required>
+                    <span class="hint">Минимум 3 символа</span>
+                </div>
+                <div class="field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="reg-password" placeholder="Пароль" required>
+                    <span class="hint">Минимум 4 символа</span>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <span>Создать аккаунт</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
 
-<div id="app" class="app hidden">
-<aside class="sidebar">
-<div class="sidebar-top">
-<div class="profile-bar">
-<div class="profile-avatar" id="current-user-avatar">W</div>
-<div class="profile-info">
-<span class="profile-name" id="current-user-name">Waldemar</span>
-<span class="profile-status" id="current-user-status">в сети</span>
-</div>
-<div class="profile-actions">
-<button class="icon-btn" id="new-chat-btn" title="Новый чат"><i class="fas fa-edit"></i></button>
-<button class="icon-btn" id="settings-btn" title="Настройки"><i class="fas fa-cog"></i></button>
-</div>
-</div>
-<div class="search-bar">
-<i class="fas fa-search"></i>
-<input type="text" id="search-input" placeholder="Поиск по имени или @username...">
-<button class="icon-btn search-go" id="search-btn"><i class="fas fa-arrow-right"></i></button>
-</div>
-</div>
-<div id="search-results" class="search-results hidden">
-<div class="results-header">
-<span>Результаты поиска</span>
-<button class="icon-btn" id="close-search"><i class="fas fa-times"></i></button>
-</div>
-<div id="search-results-list" class="chat-list"></div>
-</div>
-<div id="chats-section" class="chats-section">
-<div class="chats-header">
-<span>Все чаты</span>
-<span class="chats-count" id="contacts-count">0</span>
-</div>
-<div id="contacts-list" class="chat-list"></div>
-</div>
-</aside>
+    <div id="app" class="app hidden">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="profile-bar">
+                    <div class="profile-avatar" id="current-user-avatar">W</div>
+                    <div class="profile-info">
+                        <span class="profile-name" id="current-user-name">Waldemar</span>
+                        <span class="profile-status" id="current-user-status">в сети</span>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="icon-btn" id="new-chat-btn" title="Новый чат"><i
+                                class="fas fa-edit"></i></button>
+                        <button class="icon-btn" id="settings-btn" title="Настройки"><i class="fas fa-cog"></i></button>
+                    </div>
+                </div>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Поиск по имени или @username...">
+                    <button class="icon-btn search-go" id="search-btn"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div id="search-results" class="search-results hidden">
+                <div class="results-header">
+                    <span>Результаты поиска</span>
+                    <button class="icon-btn" id="close-search"><i class="fas fa-times"></i></button>
+                </div>
+                <div id="search-results-list" class="chat-list"></div>
+            </div>
+            <div id="chats-section" class="chats-section">
+                <div class="chats-header">
+                    <span>Все чаты</span>
+                    <span class="chats-count" id="contacts-count">0</span>
+                </div>
+                <div id="contacts-list" class="chat-list"></div>
+            </div>
+        </aside>
 
-<main class="chat-area">
-<div id="empty-state" class="empty-state">
-<div class="empty-illustration">
-<svg viewBox="0 0 200 200" fill="none">
-<circle cx="100" cy="100" r="80" stroke="url(#grad1)" stroke-width="1" opacity="0.3"/>
-<circle cx="100" cy="100" r="60" stroke="url(#grad1)" stroke-width="1" opacity="0.2"/>
-<defs>
-<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-<stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
-</linearGradient>
-</defs>
-<path d="M70 90 Q100 60 130 90 T170 110" stroke="url(#grad1)" stroke-width="2" fill="none" opacity="0.5"/>
-<circle cx="85" cy="85" r="6" fill="url(#grad1)" opacity="0.6"/>
-<circle cx="115" cy="85" r="6" fill="url(#grad1)" opacity="0.6"/>
-<path d="M90 105 Q100 115 110 105" stroke="url(#grad1)" stroke-width="2" fill="none" opacity="0.5"/>
-</svg>
-</div>
-<h2>WALDEMAR Messenger</h2>
-<p>Выберите чат или найдите друга по @username,<br>чтобы начать общение</p>
-<div class="features">
-<div class="feat"><i class="fas fa-shield-alt"></i><span>Безопасность</span></div>
-<div class="feat"><i class="fas fa-bolt"></i><span>Скорость</span></div>
-<div class="feat"><i class="fas fa-heart"></i><span>Удобство</span></div>
-</div>
-</div>
+        <main class="chat-area">
+            <div id="empty-state" class="empty-state">
+                <div class="empty-illustration">
+                    <svg viewBox="0 0 200 200" fill="none">
+                        <circle cx="100" cy="100" r="80" stroke="url(#grad1)" stroke-width="1" opacity="0.3" />
+                        <circle cx="100" cy="100" r="60" stroke="url(#grad1)" stroke-width="1" opacity="0.2" />
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M70 90 Q100 60 130 90 T170 110" stroke="url(#grad1)" stroke-width="2" fill="none"
+                            opacity="0.5" />
+                        <circle cx="85" cy="85" r="6" fill="url(#grad1)" opacity="0.6" />
+                        <circle cx="115" cy="85" r="6" fill="url(#grad1)" opacity="0.6" />
+                        <path d="M90 105 Q100 115 110 105" stroke="url(#grad1)" stroke-width="2" fill="none"
+                            opacity="0.5" />
+                    </svg>
+                </div>
+                <h2>WALDEMAR Messenger</h2>
+                <p>Выберите чат или найдите друга по @username,<br>чтобы начать общение</p>
+                <div class="features">
+                    <div class="feat"><i class="fas fa-shield-alt"></i><span>Безопасность</span></div>
+                    <div class="feat"><i class="fas fa-bolt"></i><span>Скорость</span></div>
+                    <div class="feat"><i class="fas fa-heart"></i><span>Удобство</span></div>
+                </div>
+            </div>
 
-<div class="chat-header hidden" id="chat-header">
-<div class="chat-header-info" id="chat-header-user">
-<div class="header-avatar" id="chat-avatar">A</div>
-<div class="header-meta">
-<span class="header-name" id="chat-name"></span>
-<span class="header-status" id="chat-status"></span>
-</div>
-</div>
-<div class="chat-header-actions">
-<button class="icon-btn" id="search-in-chat" title="Поиск в чате"><i class="fas fa-search"></i></button>
-<button class="icon-btn" id="gift-btn" title="Подарить подарок"><i class="fas fa-gift"></i></button>
-<button class="icon-btn" id="chat-menu-btn" title="Меню"><i class="fas fa-ellipsis-v"></i></button>
-</div>
-</div>
+            <div class="chat-header hidden" id="chat-header">
+                <button class="mobile-back" id="mobile-back-btn"><i class="fas fa-arrow-left"></i></button>
+                <div class="chat-header-info" id="chat-header-user">
+                    <div class="header-avatar" id="chat-avatar">A</div>
+                    <div class="header-meta">
+                        <span class="header-name" id="chat-name"></span>
+                        <span class="header-status" id="chat-status"></span>
+                    </div>
+                </div>
+                <div class="chat-header-actions">
+                    <button class="icon-btn" id="search-in-chat" title="Поиск в чате"><i
+                            class="fas fa-search"></i></button>
+                    <button class="icon-btn" id="gift-btn" title="Подарить подарок"><i class="fas fa-gift"></i></button>
+                    <button class="icon-btn" id="chat-menu-btn" title="Меню"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
 
-<div class="messages-wrap hidden" id="messages-wrap">
-<div class="messages-scroll" id="messages-scroll">
-<div class="date-badge" id="messages-date">Сегодня</div>
-<div id="messages-list" class="messages-list"></div>
-<div class="typing hidden" id="typing-indicator">
-<span>печатает</span>
-<div class="dots"><span></span><span></span><span></span></div>
-</div>
-</div>
-</div>
+            <div class="pin-bar hidden" id="pin-bar">
+                <i class="fas fa-thumbtack"></i>
+                <div class="pin-bar-body">
+                    <div class="pin-bar-label">Закреплено</div>
+                    <div class="pin-bar-text" id="pin-bar-text"></div>
+                </div>
+                <button class="icon-btn" id="unpin-btn" title="Открепить"><i class="fas fa-times"></i></button>
+            </div>
 
-<div class="reply-preview hidden" id="reply-bar">
-<div class="reply-accent"></div>
-<div class="reply-body">
-<div class="reply-author" id="reply-name"></div>
-<div class="reply-msg" id="reply-text"></div>
-</div>
-<button class="icon-btn" id="cancel-reply"><i class="fas fa-times"></i></button>
-</div>
+            <div class="messages-wrap hidden" id="messages-wrap">
+                <div class="messages-scroll" id="messages-scroll">
+                    <div class="date-badge" id="messages-date">Сегодня</div>
+                    <div id="messages-list" class="messages-list"></div>
+                    <div class="typing hidden" id="typing-indicator">
+                        <span>печатает</span>
+                        <div class="dots"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+            </div>
 
-<div class="composer hidden" id="composer">
-<button class="icon-btn attach-toggle" id="attach-btn" title="Прикрепить"><i class="fas fa-paperclip"></i></button>
-<div class="input-wrap">
-<input type="text" id="message-input" placeholder="Напишите сообщение..." autocomplete="off">
-</div>
-<button class="icon-btn voice-toggle" id="voice-btn" title="Голосовое"><i class="fas fa-microphone"></i></button>
-<button class="icon-btn send-toggle hidden" id="send-btn" title="Отправить"><i class="fas fa-paper-plane"></i></button>
-</div>
+            <div class="reply-preview hidden" id="reply-bar">
+                <div class="reply-accent"></div>
+                <div class="reply-body">
+                    <div class="reply-author" id="reply-name"></div>
+                    <div class="reply-msg" id="reply-text"></div>
+                </div>
+                <button class="icon-btn" id="cancel-reply"><i class="fas fa-times"></i></button>
+            </div>
 
-<div class="attach-panel hidden" id="attach-menu">
-<div class="attach-option" data-type="photo">
-<div class="attach-circle green"><i class="fas fa-image"></i></div>
-<span>Фото</span>
-</div>
-<div class="attach-option" data-type="file">
-<div class="attach-circle blue"><i class="fas fa-file"></i></div>
-<span>Файл</span>
-</div>
-<div class="attach-option" data-type="location">
-<div class="attach-circle red"><i class="fas fa-map-marker-alt"></i></div>
-<span>Гео</span>
-</div>
-<div class="attach-option" data-type="contact">
-<div class="attach-circle orange"><i class="fas fa-address-card"></i></div>
-<span>Контакт</span>
-</div>
-<div class="attach-option" data-type="poll">
-<div class="attach-circle purple"><i class="fas fa-poll"></i></div>
-<span>Опрос</span>
-</div>
-</div>
+            <div class="composer hidden" id="composer">
+                <button class="icon-btn attach-toggle" id="attach-btn" title="Прикрепить"><i
+                        class="fas fa-paperclip"></i></button>
+                <div class="input-wrap">
+                    <input type="text" id="message-input" placeholder="Напишите сообщение..." autocomplete="off">
+                    <button class="icon-btn emoji-toggle" id="emoji-btn" title="Эмодзи"><i
+                            class="far fa-smile"></i></button>
+                </div>
+                <button class="icon-btn voice-toggle" id="voice-btn" title="Голосовое"><i
+                        class="fas fa-microphone"></i></button>
+                <button class="icon-btn send-toggle hidden" id="send-btn" title="Отправить"><i
+                        class="fas fa-paper-plane"></i></button>
+            </div>
 
-<div class="voice-panel hidden" id="voice-recorder">
-<div class="voice-visual">
-<span></span><span></span><span></span><span></span><span></span>
-<span></span><span></span><span></span><span></span><span></span>
-</div>
-<span class="voice-time">00:00</span>
-<button class="icon-btn voice-done" id="voice-stop"><i class="fas fa-check"></i></button>
-<button class="icon-btn voice-discard" id="voice-cancel"><i class="fas fa-times"></i></button>
-</div>
-</main>
-</div>
+            <div class="emoji-panel hidden" id="emoji-picker">
+                <div class="emoji-tabs">
+                    <button class="emoji-tab active" data-cat="smileys">😀</button>
+                    <button class="emoji-tab" data-cat="hearts">❤️</button>
+                    <button class="emoji-tab" data-cat="hands">👋</button>
+                    <button class="emoji-tab" data-cat="animals">🐱</button>
+                    <button class="emoji-tab" data-cat="food">🍕</button>
+                    <button class="emoji-tab" data-cat="objects">⚽</button>
+                    <button class="emoji-tab" data-cat="flags">🏳️</button>
+                </div>
+                <div id="emoji-grid" class="emoji-grid"></div>
+            </div>
 
-<div id="settings-modal" class="overlay hidden">
-<div class="panel settings-panel">
-<div class="panel-head">
-<h3>Настройки</h3>
-<button class="icon-btn" id="close-settings"><i class="fas fa-times"></i></button>
-</div>
-<div class="panel-body">
-<div class="user-card">
-<div class="user-card-avatar" id="settings-avatar">W</div>
-<div class="user-card-info">
-<h4 id="settings-profile-name">Waldemar</h4>
-<span id="settings-profile-username">@waldemar</span>
-<span class="user-card-status" id="settings-online-status">в сети</span>
-</div>
-<button class="icon-btn" id="edit-profile-btn"><i class="fas fa-pen"></i></button>
-</div>
-<div class="setting-group">
-<h5><i class="fas fa-palette"></i> Внешний вид</h5>
-<label class="switch-row">
-<div class="switch-label"><span>Темная тема</span><small>Темный режим интерфейса</small></div>
-<div class="switch"><input type="checkbox" id="dark-theme" checked><span class="slider"></span></div>
-</label>
-</div>
-<div class="setting-group">
-<h5><i class="fas fa-shield-alt"></i> Конфиденциальность</h5>
-<label class="switch-row">
-<div class="switch-label"><span>Статус "в сети"</span><small>Видно когда вы онлайн</small></div>
-<div class="switch"><input type="checkbox" id="privacy-online" checked><span class="slider"></span></div>
-</label>
-<label class="switch-row">
-<div class="switch-label"><span>"Был в сети"</span><small>Показывать последнее время</small></div>
-<div class="switch"><input type="checkbox" id="privacy-last-seen" checked><span class="slider"></span></div>
-</label>
-<label class="switch-row">
-<div class="switch-label"><span>Никнейм в поиске</span><small>Могут найти по @username</small></div>
-<div class="switch"><input type="checkbox" id="privacy-username" checked><span class="slider"></span></div>
-</label>
-<label class="switch-row">
-<div class="switch-label"><span>Принимать подарки</span><small>Друзья могут отправлять подарки</small></div>
-<div class="switch"><input type="checkbox" id="privacy-gifts" checked><span class="slider"></span></div>
-</label>
-<label class="switch-row">
-<div class="switch-label"><span>Автоудаление</span><small>Удалять сообщения через 24ч</small></div>
-<div class="switch"><input type="checkbox" id="auto-delete"><span class="slider"></span></div>
-</label>
-</div>
-<div class="setting-group">
-<h5><i class="fas fa-bell"></i> Уведомления</h5>
-<label class="switch-row">
-<div class="switch-label"><span>Звуковые</span><small>Звук при новом сообщении</small></div>
-<div class="switch"><input type="checkbox" id="notif-sound" checked><span class="slider"></span></div>
-</label>
-<label class="switch-row">
-<div class="switch-label"><span>Всплывающие</span><small>Показывать уведомления</small></div>
-<div class="switch"><input type="checkbox" id="notif-popup" checked><span class="slider"></span></div>
-</label>
-<label class="switch-row">
-<div class="switch-label"><span>Предпросмотр</span><small>Показывать текст в уведомлениях</small></div>
-<div class="switch"><input type="checkbox" id="notif-preview" checked><span class="slider"></span></div>
-</label>
-</div>
-<div class="setting-group">
-<h5><i class="fas fa-user-cog"></i> Аккаунт</h5>
-<button class="row-btn" id="change-password-btn"><i class="fas fa-key"></i><span>Сменить пароль</span></button>
-<button class="row-btn" id="delete-account-btn"><i class="fas fa-trash-alt"></i><span>Удалить аккаунт</span></button>
-<button class="row-btn danger" id="logout-btn"><i class="fas fa-sign-out-alt"></i><span>Выйти</span></button>
-</div>
-<div class="setting-group">
-<h5><i class="fas fa-info-circle"></i> О приложении</h5>
-<div class="about-block">
-<div class="about-logo">W</div>
-<div class="about-meta">
-<span>WALDEMAR Messenger</span>
-<small>Версия 2.0.0</small>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+            <div class="attach-panel hidden" id="attach-menu">
+                <input type="file" id="photo-input" accept="image/*" class="hidden">
+                <input type="file" id="file-input" class="hidden">
+                <div class="attach-option" data-type="photo">
+                    <div class="attach-circle green"><i class="fas fa-image"></i></div>
+                    <span>Фото</span>
+                </div>
+                <div class="attach-option" data-type="file">
+                    <div class="attach-circle blue"><i class="fas fa-file"></i></div>
+                    <span>Файл</span>
+                </div>
+                <div class="attach-option" data-type="location">
+                    <div class="attach-circle red"><i class="fas fa-map-marker-alt"></i></div>
+                    <span>Гео</span>
+                </div>
+                <div class="attach-option" data-type="contact">
+                    <div class="attach-circle orange"><i class="fas fa-address-card"></i></div>
+                    <span>Контакт</span>
+                </div>
+                <div class="attach-option" data-type="poll">
+                    <div class="attach-circle purple"><i class="fas fa-poll"></i></div>
+                    <span>Опрос</span>
+                </div>
+            </div>
 
-<div id="gift-modal" class="overlay hidden">
-<div class="panel gift-panel">
-<div class="panel-head">
-<h3><i class="fas fa-gift"></i> Подарить подарок</h3>
-<button class="icon-btn" id="close-gift"><i class="fas fa-times"></i></button>
-</div>
-<div class="panel-body">
-<div class="gift-target">
-<div class="gift-target-avatar" id="gift-avatar">A</div>
-<div class="gift-target-meta">
-<span id="gift-username">Другу</span>
-<small>Выберите подарок</small>
-</div>
-</div>
-<div class="gift-grid">
-<div class="gift-cell" data-gift="rose"><span class="gift-icon">ROZA</span><span class="gift-title">Роза</span><span class="gift-sub">Романтика</span></div>
-<div class="gift-cell" data-gift="heart"><span class="gift-icon">SERDCE</span><span class="gift-title">Сердце</span><span class="gift-sub">Любовь</span></div>
-<div class="gift-cell" data-gift="star"><span class="gift-icon">ZVEZDA</span><span class="gift-title">Звезда</span><span class="gift-sub">Восхищение</span></div>
-<div class="gift-cell" data-gift="crown"><span class="gift-icon">KORONA</span><span class="gift-title">Корона</span><span class="gift-sub">Король</span></div>
-<div class="gift-cell" data-gift="trophy"><span class="gift-icon">KUBOK</span><span class="gift-title">Кубок</span><span class="gift-sub">Победа</span></div>
-<div class="gift-cell" data-gift="fire"><span class="gift-icon">OGON</span><span class="gift-title">Огонь</span><span class="gift-sub">Жарко</span></div>
-<div class="gift-cell" data-gift="diamond"><span class="gift-icon">ALMAZ</span><span class="gift-title">Алмаз</span><span class="gift-sub">Роскошь</span></div>
-<div class="gift-cell" data-gift="rocket"><span class="gift-icon">RAKETA</span><span class="gift-title">Ракета</span><span class="gift-sub">Вперед</span></div>
-</div>
-<button class="btn-primary" id="send-gift-btn">
-<span>Отправить подарок</span>
-<i class="fas fa-gift"></i>
-</button>
-</div>
-</div>
-</div>
+            <div class="voice-panel hidden" id="voice-recorder">
+                <div class="voice-visual">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <span class="voice-time">00:00</span>
+                <button class="icon-btn voice-done" id="voice-stop"><i class="fas fa-check"></i></button>
+                <button class="icon-btn voice-discard" id="voice-cancel"><i class="fas fa-times"></i></button>
+            </div>
+        </main>
+    </div>
 
-<div id="confirm-modal" class="overlay hidden">
-<div class="panel confirm-panel">
-<div class="confirm-icon"><i class="fas fa-exclamation-triangle"></i></div>
-<h3 id="confirm-title">Подтвердите</h3>
-<p id="confirm-text">Вы уверены?</p>
-<div class="confirm-btns">
-<button class="btn-secondary" id="confirm-cancel">Отмена</button>
-<button class="btn-danger" id="confirm-ok">Подтвердить</button>
-</div>
-</div>
-</div>
+    <div id="settings-modal" class="overlay hidden">
+        <div class="panel settings-panel">
+            <div class="panel-head">
+                <h3>Настройки</h3>
+                <button class="icon-btn" id="close-settings"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="panel-body">
+                <div class="user-card">
+                    <div class="user-card-avatar" id="settings-avatar">W</div>
+                    <div class="user-card-info">
+                        <h4 id="settings-profile-name">Waldemar</h4>
+                        <span id="settings-profile-username">@waldemar</span>
+                        <span class="user-card-status" id="settings-online-status">в сети</span>
+                    </div>
+                    <button class="icon-btn" id="edit-profile-btn"><i class="fas fa-pen"></i></button>
+                </div>
+                <div class="setting-group">
+                    <h5><i class="fas fa-palette"></i> Внешний вид</h5>
+                    <label class="switch-row">
+                        <div class="switch-label"><span>Темная тема</span><small>Темный режим интерфейса</small></div>
+                        <div class="switch"><input type="checkbox" id="dark-theme" checked><span class="slider"></span>
+                        </div>
+                    </label>
+                </div>
+                <div class="setting-group">
+                    <h5><i class="fas fa-shield-alt"></i> Конфиденциальность</h5>
+                    <label class="switch-row">
+                        <div class="switch-label"><span>Статус "в сети"</span><small>Видно когда вы онлайн</small></div>
+                        <div class="switch"><input type="checkbox" id="privacy-online" checked><span
+                                class="slider"></span></div>
+                    </label>
+                    <label class="switch-row">
+                        <div class="switch-label"><span>"Был в сети"</span><small>Показывать последнее время</small>
+                        </div>
+                        <div class="switch"><input type="checkbox" id="privacy-last-seen" checked><span
+                                class="slider"></span></div>
+                    </label>
+                    <label class="switch-row">
+                        <div class="switch-label"><span>Никнейм в поиске</span><small>Могут найти по @username</small>
+                        </div>
+                        <div class="switch"><input type="checkbox" id="privacy-username" checked><span
+                                class="slider"></span></div>
+                    </label>
+                    <label class="switch-row">
+                        <div class="switch-label"><span>Принимать подарки</span><small>Друзья могут отправлять
+                                подарки</small></div>
+                        <div class="switch"><input type="checkbox" id="privacy-gifts" checked><span
+                                class="slider"></span></div>
+                    </label>
+                    <label class="switch-row">
+                        <div class="switch-label"><span>Автоудаление</span><small>Удалять сообщения через 24ч</small>
+                        </div>
+                        <div class="switch"><input type="checkbox" id="auto-delete"><span class="slider"></span></div>
+                    </label>
+                </div>
+                <div class="setting-group">
+                    <h5><i class="fas fa-bell"></i> Уведомления</h5>
+                    <label class="switch-row">
+                        <div class="switch-label"><span>Звуковые</span><small>Звук при новом сообщении</small></div>
+                        <div class="switch"><input type="checkbox" id="notif-sound" checked><span class="slider"></span>
+                        </div>
+                    </label>
+                    <label class="switch-row">
+                        <div class="switch-label"><span>Всплывающие</span><small>Показывать уведомления</small></div>
+                        <div class="switch"><input type="checkbox" id="notif-popup" checked><span class="slider"></span>
+                        </div>
+                    </label>
+                    <label class="switch-row">
+                        <div class="switch-label"><span>Предпросмотр</span><small>Показывать текст в
+                                уведомлениях</small></div>
+                        <div class="switch"><input type="checkbox" id="notif-preview" checked><span
+                                class="slider"></span></div>
+                    </label>
+                </div>
+                <div class="setting-group">
+                    <h5><i class="fas fa-user-cog"></i> Аккаунт</h5>
+                    <button class="row-btn" id="change-password-btn"><i class="fas fa-key"></i><span>Сменить
+                            пароль</span></button>
+                    <button class="row-btn" id="delete-account-btn"><i class="fas fa-trash-alt"></i><span>Удалить
+                            аккаунт</span></button>
+                    <button class="row-btn danger" id="logout-btn"><i
+                            class="fas fa-sign-out-alt"></i><span>Выйти</span></button>
+                </div>
+                <div class="setting-group">
+                    <h5><i class="fas fa-info-circle"></i> О приложении</h5>
+                    <div class="about-block">
+                        <div class="about-logo">W</div>
+                        <div class="about-meta">
+                            <span>WALDEMAR Messenger</span>
+                            <small>Версия 2.0.0</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div id="msg-menu" class="ctx-menu hidden">
-<div class="ctx-item" data-action="reply"><i class="fas fa-reply"></i><span>Ответить</span></div>
-<div class="ctx-item" data-action="edit"><i class="fas fa-pen"></i><span>Изменить</span></div>
-<div class="ctx-item" data-action="copy"><i class="fas fa-copy"></i><span>Копировать</span></div>
-<div class="ctx-item" data-action="forward"><i class="fas fa-share"></i><span>Переслать</span></div>
-<div class="ctx-item" data-action="pin"><i class="fas fa-thumbtack"></i><span>Закрепить</span></div>
-<div class="ctx-item" data-action="react"><i class="far fa-smile"></i><span>Реакция</span></div>
-<div class="ctx-item danger" data-action="delete"><i class="fas fa-trash"></i><span>Удалить</span></div>
-</div>
+    <div id="gift-modal" class="overlay hidden">
+        <div class="panel gift-panel">
+            <div class="panel-head">
+                <h3><i class="fas fa-gift"></i> Подарить подарок</h3>
+                <button class="icon-btn" id="close-gift"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="panel-body">
+                <div class="gift-target">
+                    <div class="gift-target-avatar" id="gift-avatar">A</div>
+                    <div class="gift-target-meta">
+                        <span id="gift-username">Другу</span>
+                        <small>Выберите подарок</small>
+                    </div>
+                </div>
+                <div class="gift-grid">
+                    <div class="gift-cell" data-gift="rose"><span class="gift-icon">🌹</span><span
+                            class="gift-title">Роза</span><span class="gift-sub">Романтика</span></div>
+                    <div class="gift-cell" data-gift="heart"><span class="gift-icon">❤️</span><span
+                            class="gift-title">Сердце</span><span class="gift-sub">Любовь</span></div>
+                    <div class="gift-cell" data-gift="star"><span class="gift-icon">⭐</span><span
+                            class="gift-title">Звезда</span><span class="gift-sub">Восхищение</span></div>
+                    <div class="gift-cell" data-gift="crown"><span class="gift-icon">👑</span><span
+                            class="gift-title">Корона</span><span class="gift-sub">Король</span></div>
+                    <div class="gift-cell" data-gift="trophy"><span class="gift-icon">🏆</span><span
+                            class="gift-title">Кубок</span><span class="gift-sub">Победа</span></div>
+                    <div class="gift-cell" data-gift="fire"><span class="gift-icon">🔥</span><span
+                            class="gift-title">Огонь</span><span class="gift-sub">Жарко</span></div>
+                    <div class="gift-cell" data-gift="diamond"><span class="gift-icon">💎</span><span
+                            class="gift-title">Алмаз</span><span class="gift-sub">Роскошь</span></div>
+                    <div class="gift-cell" data-gift="rocket"><span class="gift-icon">🚀</span><span
+                            class="gift-title">Ракета</span><span class="gift-sub">Вперед</span></div>
+                </div>
+                <button class="btn-primary" id="send-gift-btn">
+                    <span>Отправить подарок</span>
+                    <i class="fas fa-gift"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
-<div id="reaction-picker" class="reaction-pop hidden">
-<button class="react-btn" data-emoji="&hearts;">&hearts;</button>
-<button class="react-btn" data-emoji="&plus;">&plus;</button>
-<button class="react-btn" data-emoji="&times;">&times;</button>
-<button class="react-btn" data-emoji="&star;">&star;</button>
-<button class="react-btn" data-emoji="&uarr;">&uarr;</button>
-<button class="react-btn" data-emoji="&darr;">&darr;</button>
-<button class="react-btn" data-emoji="&check;">&check;</button>
-<button class="react-btn" data-emoji="&cross;">&cross;</button>
-</div>
+    <div id="confirm-modal" class="overlay hidden">
+        <div class="panel confirm-panel">
+            <div class="confirm-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3 id="confirm-title">Подтвердите</h3>
+            <p id="confirm-text">Вы уверены?</p>
+            <div class="confirm-btns">
+                <button class="btn-secondary" id="confirm-cancel">Отмена</button>
+                <button class="btn-danger" id="confirm-ok">Подтвердить</button>
+            </div>
+        </div>
+    </div>
 
-<div id="toast-container" class="toast-stack"></div>
+    <div id="msg-menu" class="ctx-menu hidden">
+        <div class="ctx-item" data-action="reply"><i class="fas fa-reply"></i><span>Ответить</span></div>
+        <div class="ctx-item" data-action="edit"><i class="fas fa-pen"></i><span>Изменить</span></div>
+        <div class="ctx-item" data-action="copy"><i class="fas fa-copy"></i><span>Копировать</span></div>
+        <div class="ctx-item" data-action="forward"><i class="fas fa-share"></i><span>Переслать</span></div>
+        <div class="ctx-item" data-action="pin"><i class="fas fa-thumbtack"></i><span>Закрепить</span></div>
+        <div class="ctx-item" data-action="react"><i class="far fa-smile"></i><span>Реакция</span></div>
+        <div class="ctx-item danger" data-action="delete"><i class="fas fa-trash"></i><span>Удалить</span></div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
-<script src="app.js"></script>
+    <div id="reaction-picker" class="reaction-pop hidden">
+        <button class="react-btn" data-emoji="❤️">❤️</button>
+        <button class="react-btn" data-emoji="👍">👍</button>
+        <button class="react-btn" data-emoji="😂">😂</button>
+        <button class="react-btn" data-emoji="😮">😮</button>
+        <button class="react-btn" data-emoji="😢">😢</button>
+        <button class="react-btn" data-emoji="🔥">🔥</button>
+        <button class="react-btn" data-emoji="👏">👏</button>
+        <button class="react-btn" data-emoji="🎉">🎉</button>
+    </div>
+
+    <div id="forward-modal" class="overlay hidden">
+        <div class="panel forward-panel">
+            <div class="panel-head">
+                <h3><i class="fas fa-share"></i> Переслать сообщение</h3>
+                <button class="icon-btn" id="close-forward"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="panel-body">
+                <div class="forward-preview" id="forward-preview"></div>
+                <div class="forward-list" id="forward-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-profile-modal" class="overlay hidden">
+        <div class="panel edit-profile-panel">
+            <div class="panel-head">
+                <h3><i class="fas fa-user-edit"></i> Редактировать профиль</h3>
+                <button class="icon-btn" id="close-edit-profile"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="panel-body">
+                <div class="edit-avatar-wrap">
+                    <div class="edit-avatar-big" id="edit-avatar-preview">W</div>
+                </div>
+                <label class="edit-field-label">Имя</label>
+                <input type="text" class="edit-input" id="edit-display-name" placeholder="Ваше имя">
+                <label class="edit-field-label">О себе</label>
+                <textarea class="edit-textarea" id="edit-bio" placeholder="Расскажите о себе..."></textarea>
+                <button class="btn-primary" id="save-profile-btn" style="margin-top:18px">
+                    <span>Сохранить</span>
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-stack"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>
