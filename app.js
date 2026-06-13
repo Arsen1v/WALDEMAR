@@ -8,6 +8,16 @@ const SUPABASE_ANON_KEY = 'sb_publishable_3_csJ3ON3rzeBnkvwHPk_w_FHPTUowU';
 
 // Initialize Supabase
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ========== EMOJI DATA ==========
+const emojis = {
+    smileys: ['😀','😃','😄','😁','😅','😂','🤣','😊','😇','🙂','🙃','😉','😌','😍','🥰','😘','😗','😙','😚','😋','😛','😝','😜','🤪','🤨','🧐','🤓','😎','🥸','🤩','🥳','😏','😒','😞','😔','😟','😕','🙁','☹️','😣','😖','😫','😩','🥺','😢','😭','😤','😠','😡','🤬','🤯','😳','🥵','🥶','😱','😨','😰','😥','😓','🤗','🤔','🤭','🤫','🤥','😶','😐','😑','😬','🙄','😯','😦','😧','😮','😲','🥱','😴','🤤','😪','😵','🤐','🥴','🤢','🤮','🤧','😷','🤒','🤕'],
+    hearts: ['❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗','💖','💘','💝','💟'],
+    hands: ['👋','🤚','🖐','✋','🖖','👌','🤌','🤏','✌️','🤞','🤟','🤘','🤙','👈','👉','👆','🖕','👇','☝️','👍','👎','✊','👊','🤛','🤜','👏','🙌','👐','🤲','🤝','🙏','✍️','💪','🦾','🦿','🦵','🦶','👂','🦻','👃','🧠','🫀','🫁','🦷','🦴','👀','👁','👅','👄','💋','🩸'],
+    animals: ['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐻‍❄️','🐨','🐯','🦁','🐮','🐷','🐽','🐸','🐵','🙈','🙉','🙊','🐒','🐔','🐧','🐦','🐤','🐣','🐥','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋','🐌','🐞','🐜','🦟','🦗','🕷','🕸','🦂','🐢','🐍','🦎','🦖','🦕','🐙','🦑','🦐','🦞','🦀','🐡','🐠','🐟','🐬','🐳','🐋','🦈','🐊','🐅','🐆','🦓','🦍','🦧','🐘','🦛','🦏','🐪','🐫','🦒','🦘','🐃','🐂','🐄','🐎','🐖','🐏','🐑','🦙','🐐','🦌','🐕','🐩','🦮','🐕‍🦺','🐈','🐈‍⬛','🐓','🦃','🦚','🦜','🦢','🦩','🕊','🐇','🦝','🦨','🦡','🦦','🦥','🐁','🐀','🐿','🦔','🐾','🐉','🐲','🌵','🎄','🌲','🌳','🌴','🌱','🌿','☘️','🍀','🎍','🎋','🍃','🍂','🍁','🍄','🐚','🌾','💐','🌷','🌹','🥀','🌺','🌸','🌼','🌻','🌞','🌝','🌛','🌜','🌚','🌕','🌖','🌗','🌘','🌑','🌒','🌓','🌔','🌙','🌎','🌍','🌏','🪐','💫','⭐','🌟','✨','⚡','☄️','💥','🔥','🌪','🌈','☀️','🌤','⛅','🌥','☁️','🌦','🌧','⛈','🌩','🌨','❄️','☃️','⛄','🌬','💨','💧','💦','☔','☂️','🌊','🌫'],
+    food: ['🍏','🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🫐','🍈','🍒','🍑','🍍','🥝','🥥','🥑','🍆','🥔','🥕','🌽','🌶','🫑','🥒','🥬','🥦','🧄','🧅','🍄','🥜','🌰','🍞','🥐','🥖','🥨','🥯','🥞','🧇','🧀','🍖','🍗','🥩','🥓','🍔','🍟','🍕','🌭','🥪','🌮','🌯','🫔','🥙','🧆','🥚','🍳','🥘','🍲','🫕','🥣','🥗','🍿','🧈','🧂','🥫','🍱','🍘','🍙','🍚','🍛','🍜','🍝','🍠','🍢','🍣','🍤','🍥','🥮','🍡','🥟','🥠','🥡','🦀','🦞','🦐','🦑','🦪','🍦','🍧','🍨','🍩','🍪','🎂','🍰','🧁','🥧','🍫','🍬','🍭','🍮','🍯','🍼','🥛','☕','🫖','🍵','🍶','🍾','🍷','🍸','🍹','🍺','🍻','🥂','🥃','🥤','🧋','🧃','🧉','🧊','🥢','🍽','🍴','🥄','🔪','🏺']
+};
+
 /* ===================== STATE ===================== */
 let currentUser = null;
 let currentChatId = null;
@@ -233,14 +243,15 @@ async function loadContacts() {
       user1_id,
       user2_id,
       updated_at,
-      profiles!chats_user2_id_fkey(id, username, display_name, status, last_seen),
-      profiles!chats_user1_id_fkey(id, username, display_name, status, last_seen)
+      user1:profiles!chats_user1_id_fkey(id, username, display_name, status, last_seen),
+      user2:profiles!chats_user2_id_fkey(id, username, display_name, status, last_seen)
     `)
     .or(`user1_id.eq.${currentUser.id},user2_id.eq.${currentUser.id}`)
     .order('updated_at', { ascending: false });
 
   if (error) {
     console.error('Chats load error:', error);
+    showToast('Ошибка загрузки чатов', 'err');
     return;
   }
 
@@ -250,9 +261,7 @@ async function loadContacts() {
 
   for (const chat of chats || []) {
     const otherId = chat.user1_id === currentUser.id ? chat.user2_id : chat.user1_id;
-    const otherProfile = chat.user1_id === currentUser.id 
-      ? chat.profiles?.[1] || chat.profiles 
-      : chat.profiles?.[0] || chat.profiles;
+    const otherProfile = chat.user1_id === currentUser.id ? chat.user2 : chat.user1;
 
     if (!otherProfile) continue;
 
@@ -300,11 +309,11 @@ function renderContactRow(contact) {
   const time = contact.last_message_time ? formatTime(contact.last_message_time) : '';
   
   row.innerHTML = `
-    <div class="profile-avatar ${isOnline ? '' : 'offline'}">${initials(contact.display_name)}</div>
+    <div class="profile-avatar ${isOnline ? '' : 'offline'}">${escapeHtml(initials(contact.display_name))}</div>
     <div class="chat-row-info">
-      <div class="chat-title">${contact.display_name}</div>
+      <div class="chat-title">${escapeHtml(contact.display_name)}</div>
       <div class="chat-subtitle ${contact.unread > 0 ? 'unread' : ''}">
-        ${contact.last_message || 'Нет сообщений'}
+        ${escapeHtml(contact.last_message || 'Нет сообщений')}
       </div>
     </div>
     <div class="chat-row-meta">
@@ -359,10 +368,10 @@ async function performSearch() {
     const row = document.createElement('div');
     row.className = 'chat-row';
     row.innerHTML = `
-      <div class="profile-avatar ${user.status === 'online' ? '' : 'offline'}">${initials(user.display_name)}</div>
+      <div class="profile-avatar ${user.status === 'online' ? '' : 'offline'}">${escapeHtml(initials(user.display_name))}</div>
       <div class="chat-row-info">
-        <div class="chat-title">${user.display_name}</div>
-        <div class="chat-subtitle">@${user.username}</div>
+        <div class="chat-title">${escapeHtml(user.display_name)}</div>
+        <div class="chat-subtitle">@${escapeHtml(user.username)}</div>
       </div>
       <button class="add-chat-btn">Написать</button>
     `;
@@ -436,11 +445,12 @@ async function openChat(contact) {
   toggleVisibility('#chat-header', true);
   toggleVisibility('#messages-wrap', true);
   toggleVisibility('#composer', true);
+  $('#app').classList.add('chat-open');
 
   $('#chat-name').textContent = contact.display_name;
   $('#chat-avatar').textContent = initials(contact.display_name);
   const isOnline = contact.status === 'online';
-  $('#chat-status').textContent = isOnline ? 'в сети' : `был(а) ${formatTime(contact.last_seen)}`;
+  $('#chat-status').textContent = isOnline ? 'в сети' : (contact.last_seen ? `был(а) ${formatTime(contact.last_seen)}` : 'давно не в сети');
   $('#chat-status').className = 'header-status ' + (isOnline ? '' : 'offline');
   $('#chat-avatar').className = 'header-avatar ' + (isOnline ? '' : 'offline');
 
@@ -462,7 +472,41 @@ async function openChat(contact) {
     const subtitle = row.querySelector('.chat-subtitle');
     if (subtitle) subtitle.classList.remove('unread');
   }
+
+  updatePinBar();
 }
+
+$('#mobile-back-btn')?.addEventListener('click', () => {
+  $('#app').classList.remove('chat-open');
+});
+
+function updatePinBar() {
+  const pinned = messages.find(m => m.pinned);
+  if (pinned) {
+    $('#pin-bar-text').textContent = pinned.type === 'text' ? pinned.content : '📎 Вложение';
+    toggleVisibility('#pin-bar', true);
+  } else {
+    toggleVisibility('#pin-bar', false);
+  }
+}
+
+$('#pin-bar')?.addEventListener('click', (e) => {
+  if (e.target.closest('#unpin-btn')) return;
+  const pinned = messages.find(m => m.pinned);
+  if (pinned) scrollToMessage(pinned.id);
+});
+
+$('#unpin-btn')?.addEventListener('click', async (e) => {
+  e.stopPropagation();
+  const pinned = messages.find(m => m.pinned);
+  if (!pinned) return;
+  const { error } = await supabase.from('messages').update({ pinned: false }).eq('id', pinned.id);
+  if (error) { showToast('Ошибка открепления', 'err'); return; }
+  pinned.pinned = false;
+  updatePinBar();
+  renderMessages();
+  showToast('Сообщение откреплено', 'ok');
+});
 
 async function loadMessages(chatId) {
   const { data, error } = await supabase
@@ -505,11 +549,15 @@ function renderMessages() {
 function renderMessageBubble(msg) {
   const isOut = msg.sender_id === currentUser.id;
   const bubble = document.createElement('div');
-  bubble.className = `msg-bubble ${isOut ? 'out' : 'in'}`;
+  bubble.className = `msg-bubble ${isOut ? 'out' : 'in'} ${msg.pinned ? 'pinned' : ''}`;
   bubble.dataset.id = msg.id;
 
   let content = '';
-  
+
+  if (msg.forwarded_from) {
+    content += `<div class="msg-forwarded"><i class="fas fa-share"></i><span>Переслано от ${escapeHtml(msg.forwarded_from)}</span></div>`;
+  }
+
   if (msg.reply_to) {
     const replyMsg = messages.find(m => m.id === msg.reply_to);
     if (replyMsg) {
@@ -526,10 +574,14 @@ function renderMessageBubble(msg) {
   if (msg.type === 'gift') {
     const giftData = JSON.parse(msg.content || '{}');
     content += `
-      <div class="gift-big">${giftData.icon || 'PODAROK'}</div>
+      <div class="gift-big">${giftData.icon || '🎁'}</div>
       <div class="gift-label">${giftData.title || 'Подарок'}</div>
       <div class="gift-from">от ${giftData.from || 'друга'}</div>
     `;
+  } else if (msg.type === 'photo') {
+    const photoData = JSON.parse(msg.content || '{}');
+    content += `<img src="${escapeHtml(photoData.url || '')}" class="msg-image" onclick="openLightbox('${escapeHtml(photoData.url || '')}')" alt="photo">`;
+    if (photoData.caption) content += `<div style="margin-top:4px">${escapeHtml(photoData.caption)}</div>`;
   } else if (msg.type === 'file') {
     const fileData = JSON.parse(msg.content || '{}');
     content += renderFileAttachment(fileData);
@@ -543,7 +595,7 @@ function renderMessageBubble(msg) {
   const edited = msg.edited ? '<span style="opacity:0.6;font-size:10px;margin-left:4px">(изменено)</span>' : '';
 
   bubble.innerHTML = `
-    <div class="msg-body ${isOut ? 'out' : 'in'} ${msg.type === 'gift' ? 'gift' : ''}">
+    <div class="msg-body ${isOut ? 'out' : 'in'} ${msg.type === 'gift' ? 'gift' : ''} ${msg.type === 'photo' && !msg.reply_to && !msg.forwarded_from ? 'image-only' : ''}">
       ${content}
       ${edited}
       <div class="msg-footer">
@@ -555,6 +607,7 @@ function renderMessageBubble(msg) {
       <button class="msg-hover-btn" onclick="setReply('${msg.id}')" title="Ответить"><i class="fas fa-reply"></i></button>
       ${isOut ? `<button class="msg-hover-btn" onclick="editMessage('${msg.id}')" title="Изменить"><i class="fas fa-pen"></i></button>` : ''}
       <button class="msg-hover-btn" onclick="showReactionPicker('${msg.id}', event)" title="Реакция"><i class="far fa-smile"></i></button>
+      <button class="msg-hover-btn" onclick="openForwardModal('${msg.id}')" title="Переслать"><i class="fas fa-share"></i></button>
     </div>
   `;
 
@@ -580,30 +633,45 @@ function renderMessageBubble(msg) {
 
 function renderFileAttachment(file) {
   const icons = { photo: 'fa-image green', doc: 'fa-file blue', audio: 'fa-music orange' };
+  const url = file.url || '#';
   return `
-    <div class="msg-file">
+    <a class="msg-file" href="${escapeHtml(url)}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:flex">
       <div class="msg-file-icon ${file.type || 'doc'}"><i class="fas ${icons[file.type] || icons.doc}"></i></div>
       <div class="msg-file-meta">
         <div class="msg-file-name">${escapeHtml(file.name || 'Файл')}</div>
-        <div class="msg-file-size">${file.size || ''}</div>
+        <div class="msg-file-size">${escapeHtml(file.size || '')}</div>
       </div>
-    </div>
+    </a>
   `;
 }
 
 function renderVoiceAttachment(voice) {
+  const url = voice.url || '';
   return `
     <div class="msg-file">
       <div class="msg-file-icon voice"><i class="fas fa-microphone"></i></div>
       <div class="msg-file-meta">
         <div class="msg-file-name">Голосовое сообщение</div>
-        <div class="msg-file-size">${voice.duration || '0:00'}</div>
+        <div class="msg-file-size">${escapeHtml(voice.duration || '0:00')}</div>
       </div>
-      <button class="icon-btn" style="width:32px;height:32px;background:var(--primary);color:white;border-radius:50%">
+      <button class="icon-btn" style="width:32px;height:32px;background:var(--primary);color:white;border-radius:50%" onclick="playVoice('${escapeHtml(url)}', this)">
         <i class="fas fa-play" style="font-size:12px"></i>
       </button>
     </div>
   `;
+}
+
+function playVoice(url, btn) {
+  if (!url) {
+    showToast('Аудио недоступно', 'warn');
+    return;
+  }
+  const icon = btn.querySelector('i');
+  const audio = new Audio(url);
+  icon.className = 'fas fa-pause';
+  audio.play().catch(() => showToast('Не удалось воспроизвести', 'err'));
+  audio.onended = () => { icon.className = 'fas fa-play'; };
+  btn.onclick = () => { audio.pause(); icon.className = 'fas fa-play'; btn.onclick = () => playVoice(url, btn); };
 }
 
 function escapeHtml(text) {
@@ -625,6 +693,16 @@ function scrollToMessage(id) {
     msg.offsetHeight;
     msg.style.animation = 'msgPop 0.5s ease';
   }
+}
+
+function openLightbox(url) {
+  const box = document.createElement('div');
+  box.className = 'lightbox';
+  box.innerHTML = `<button class="lightbox-close"><i class="fas fa-times"></i></button><img src="${escapeHtml(url)}" alt="image">`;
+  box.addEventListener('click', (e) => {
+    if (e.target === box || e.target.closest('.lightbox-close')) box.remove();
+  });
+  document.body.appendChild(box);
 }
 
 /* ===================== SEND MESSAGE ===================== */
@@ -801,7 +879,8 @@ function updateContactPreview(msg) {
     return;
   }
   
-  contact.last_message = msg.type === 'text' ? msg.content : '[вложение]';
+  const typeLabels = { text: msg.content, photo: '📷 Фото', file: '📎 Файл', voice: '🎤 Голосовое', gift: '🎁 Подарок' };
+  contact.last_message = typeLabels[msg.type] !== undefined ? typeLabels[msg.type] : msg.content;
   contact.last_message_time = msg.created_at;
   
   if (msg.receiver_id === currentUser.id && msg.chat_id !== currentChatId) {
@@ -827,8 +906,8 @@ function showMessageMenu(e, msg) {
       case 'reply': setReply(msg.id); break;
       case 'edit': if (msg.sender_id === currentUser.id) editMessage(msg.id); break;
       case 'copy': navigator.clipboard.writeText(msg.content); showToast('Скопировано', 'ok'); break;
-      case 'forward': showToast('Пересылка в разработке', 'inf'); break;
-      case 'pin': showToast('Закрепление в разработке', 'inf'); break;
+      case 'forward': openForwardModal(msg.id); break;
+      case 'pin': togglePin(msg); break;
       case 'react': showReactionPicker(msg.id, e); break;
       case 'delete': 
         if (msg.sender_id === currentUser.id) deleteMessage(msg.id);
@@ -839,6 +918,28 @@ function showMessageMenu(e, msg) {
   };
 
   setTimeout(() => document.addEventListener('click', handler), 10);
+}
+
+async function togglePin(msg) {
+  const willPin = !msg.pinned;
+  // unpin any previously pinned message in this chat (single pin slot)
+  if (willPin) {
+    const prevPinned = messages.find(m => m.pinned && m.id !== msg.id);
+    if (prevPinned) {
+      await supabase.from('messages').update({ pinned: false }).eq('id', prevPinned.id);
+      prevPinned.pinned = false;
+    }
+  }
+
+  const { error } = await supabase.from('messages').update({ pinned: willPin }).eq('id', msg.id);
+  if (error) {
+    showToast('Ошибка закрепления', 'err');
+    return;
+  }
+  msg.pinned = willPin;
+  renderMessages();
+  updatePinBar();
+  showToast(willPin ? 'Сообщение закреплено' : 'Сообщение откреплено', 'ok');
 }
 
 async function deleteMessage(msgId) {
@@ -907,26 +1008,174 @@ document.addEventListener('click', (e) => {
 $$('.attach-option').forEach(opt => {
   opt.addEventListener('click', () => {
     const type = opt.dataset.type;
-    showToast(`${type} в разработке`, 'inf');
     toggleVisibility('#attach-menu', false);
+    if (type === 'photo') {
+      $('#photo-input').click();
+    } else if (type === 'file') {
+      $('#file-input').click();
+    } else {
+      showToast(`${type} в разработке`, 'inf');
+    }
   });
 });
+
+$('#photo-input').addEventListener('change', (e) => uploadAttachment(e.target.files[0], 'photo'));
+$('#file-input').addEventListener('change', (e) => uploadAttachment(e.target.files[0], 'file'));
+
+async function uploadAttachment(file, kind) {
+  if (!file || !currentChatId) return;
+
+  const maxSize = 20 * 1024 * 1024;
+  if (file.size > maxSize) {
+    showToast('Файл слишком большой (макс. 20MB)', 'warn');
+    return;
+  }
+
+  showToast('Загрузка...', 'inf');
+
+  const ext = file.name.split('.').pop();
+  const path = `${currentUser.id}/${Date.now()}_${randId()}.${ext}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from('attachments')
+    .upload(path, file, { cacheControl: '3600', upsert: false });
+
+  if (uploadError) {
+    console.error(uploadError);
+    showToast('Ошибка загрузки файла', 'err');
+    return;
+  }
+
+  const { data: urlData } = supabase.storage.from('attachments').getPublicUrl(path);
+  const publicUrl = urlData?.publicUrl;
+
+  let content, type;
+  if (kind === 'photo') {
+    content = JSON.stringify({ url: publicUrl, name: file.name });
+    type = 'photo';
+  } else {
+    const sizeKb = (file.size / 1024).toFixed(1);
+    content = JSON.stringify({ url: publicUrl, name: file.name, size: `${sizeKb} KB`, type: 'doc' });
+    type = 'file';
+  }
+
+  const messageData = {
+    chat_id: currentChatId,
+    sender_id: currentUser.id,
+    receiver_id: currentChatUser.user_id,
+    content,
+    type,
+    reply_to: replyToMessageId || null,
+    read: false,
+    edited: false,
+    reactions: {}
+  };
+
+  const { error } = await supabase.from('messages').insert(messageData);
+  if (error) {
+    showToast('Ошибка отправки', 'err');
+    return;
+  }
+
+  replyToMessageId = null;
+  toggleVisibility('#reply-bar', false);
+  await supabase.from('chats').update({ updated_at: new Date().toISOString() }).eq('id', currentChatId);
+  showToast(kind === 'photo' ? 'Фото отправлено' : 'Файл отправлен', 'ok');
+}
+
+/* ===================== FORWARD ===================== */
+let forwardingMessageId = null;
+
+function openForwardModal(msgId) {
+  const msg = messages.find(m => m.id === msgId);
+  if (!msg) return;
+  forwardingMessageId = msgId;
+
+  const preview = $('#forward-preview');
+  if (msg.type === 'text') preview.textContent = msg.content;
+  else if (msg.type === 'photo') preview.textContent = '📷 Фото';
+  else if (msg.type === 'file') preview.textContent = '📎 Файл';
+  else if (msg.type === 'voice') preview.textContent = '🎤 Голосовое сообщение';
+  else preview.textContent = '🎁 Подарок';
+
+  const list = $('#forward-list');
+  list.innerHTML = '';
+  if (contacts.length === 0) {
+    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted)">Нет чатов для пересылки</div>';
+  }
+  for (const c of contacts) {
+    const row = document.createElement('div');
+    row.className = 'forward-row';
+    row.innerHTML = `
+      <div class="profile-avatar ${c.status === 'online' ? '' : 'offline'}">${escapeHtml(initials(c.display_name))}</div>
+      <div class="forward-row-name">${escapeHtml(c.display_name)}</div>
+    `;
+    row.addEventListener('click', () => forwardTo(c));
+    list.appendChild(row);
+  }
+
+  toggleVisibility('#forward-modal', true);
+}
+
+$('#close-forward').addEventListener('click', () => toggleVisibility('#forward-modal', false));
+
+async function forwardTo(contact) {
+  const msg = messages.find(m => m.id === forwardingMessageId);
+  if (!msg) return;
+
+  const messageData = {
+    chat_id: contact.chat_id,
+    sender_id: currentUser.id,
+    receiver_id: contact.user_id,
+    content: msg.content,
+    type: msg.type,
+    read: false,
+    edited: false,
+    reactions: {},
+    forwarded_from: msg.sender_id === currentUser.id
+      ? (currentUser.display_name || currentUser.username)
+      : (currentChatUser?.display_name || 'Пользователь')
+  };
+
+  const { error } = await supabase.from('messages').insert(messageData);
+  if (error) {
+    showToast('Ошибка пересылки', 'err');
+    return;
+  }
+
+  await supabase.from('chats').update({ updated_at: new Date().toISOString() }).eq('id', contact.chat_id);
+  toggleVisibility('#forward-modal', false);
+  showToast(`Переслано: ${contact.display_name}`, 'ok');
+}
 
 /* ===================== VOICE ===================== */
 $('#voice-btn').addEventListener('click', startVoiceRecording);
 
-function startVoiceRecording() {
+async function startVoiceRecording() {
   if (!navigator.mediaDevices?.getUserMedia) {
     showToast('Голосовые не поддерживаются', 'warn');
     return;
   }
 
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch (err) {
+    showToast('Нет доступа к микрофону', 'err');
+    return;
+  }
+
   toggleVisibility('#voice-recorder', true);
   toggleVisibility('#composer', false);
-  
+
+  voiceChunks = [];
+  voiceRecorder = new MediaRecorder(stream);
+  voiceRecorder.ondataavailable = (e) => voiceChunks.push(e.data);
+  voiceRecorder.start();
+
   voiceStartTime = Date.now();
   const timer = $('#voice-recorder .voice-time');
-  
+
   const interval = setInterval(() => {
     const diff = Math.floor((Date.now() - voiceStartTime) / 1000);
     const m = Math.floor(diff / 60).toString().padStart(2, '0');
@@ -935,39 +1184,81 @@ function startVoiceRecording() {
   }, 1000);
 
   $('#voice-recorder').dataset.interval = interval;
+  $('#voice-recorder').dataset.streamActive = '1';
+  voiceRecorder._stream = stream;
 }
 
 $('#voice-stop').addEventListener('click', async () => {
   clearInterval(parseInt($('#voice-recorder').dataset.interval));
-  
+
   const duration = Math.floor((Date.now() - voiceStartTime) / 1000);
   const durationStr = `${Math.floor(duration / 60)}:${(duration % 60).toString().padStart(2, '0')}`;
-  
-  const voiceData = {
-    duration: durationStr,
-    url: 'voice-placeholder'
-  };
 
-  const messageData = {
-    chat_id: currentChatId,
-    sender_id: currentUser.id,
-    receiver_id: currentChatUser.user_id,
-    content: JSON.stringify(voiceData),
-    type: 'voice',
-    read: false,
-    edited: false,
-    reactions: {}
-  };
-
-  await supabase.from('messages').insert(messageData);
-  
   toggleVisibility('#voice-recorder', false);
   toggleVisibility('#composer', true);
-  showToast('Голосовое отправлено', 'ok');
+
+  if (!voiceRecorder) return;
+
+  const recorder = voiceRecorder;
+  recorder.onstop = async () => {
+    recorder._stream.getTracks().forEach(t => t.stop());
+
+    if (duration < 1) {
+      showToast('Запись слишком короткая', 'warn');
+      return;
+    }
+
+    const blob = new Blob(voiceChunks, { type: 'audio/webm' });
+    const path = `${currentUser.id}/voice_${Date.now()}_${randId()}.webm`;
+
+    showToast('Отправка...', 'inf');
+
+    const { error: uploadError } = await supabase.storage
+      .from('attachments')
+      .upload(path, blob, { contentType: 'audio/webm' });
+
+    if (uploadError) {
+      console.error(uploadError);
+      showToast('Ошибка загрузки голосового', 'err');
+      return;
+    }
+
+    const { data: urlData } = supabase.storage.from('attachments').getPublicUrl(path);
+
+    const voiceData = { duration: durationStr, url: urlData?.publicUrl || '' };
+
+    const messageData = {
+      chat_id: currentChatId,
+      sender_id: currentUser.id,
+      receiver_id: currentChatUser.user_id,
+      content: JSON.stringify(voiceData),
+      type: 'voice',
+      read: false,
+      edited: false,
+      reactions: {}
+    };
+
+    const { error } = await supabase.from('messages').insert(messageData);
+    if (error) {
+      showToast('Ошибка отправки', 'err');
+      return;
+    }
+
+    await supabase.from('chats').update({ updated_at: new Date().toISOString() }).eq('id', currentChatId);
+    showToast('Голосовое отправлено', 'ok');
+  };
+
+  recorder.stop();
+  voiceRecorder = null;
 });
 
 $('#voice-cancel').addEventListener('click', () => {
   clearInterval(parseInt($('#voice-recorder').dataset.interval));
+  if (voiceRecorder) {
+    voiceRecorder.onstop = () => voiceRecorder._stream.getTracks().forEach(t => t.stop());
+    voiceRecorder.stop();
+    voiceRecorder = null;
+  }
   toggleVisibility('#voice-recorder', false);
   toggleVisibility('#composer', true);
 });
@@ -998,15 +1289,27 @@ $('#send-gift-btn').addEventListener('click', async () => {
     return;
   }
 
+  const { data: targetProfile } = await supabase
+    .from('profiles')
+    .select('accept_gifts')
+    .eq('id', currentChatUser.user_id)
+    .single();
+
+  if (targetProfile && targetProfile.accept_gifts === false) {
+    showToast('Пользователь не принимает подарки', 'warn');
+    toggleVisibility('#gift-modal', false);
+    return;
+  }
+
   const giftMap = {
-    rose: { icon: 'ROZA', title: 'Роза', sub: 'Романтика' },
-    heart: { icon: 'SERDCE', title: 'Сердце', sub: 'Любовь' },
-    star: { icon: 'ZVEZDA', title: 'Звезда', sub: 'Восхищение' },
-    crown: { icon: 'KORONA', title: 'Корона', sub: 'Король' },
-    trophy: { icon: 'KUBOK', title: 'Кубок', sub: 'Победа' },
-    fire: { icon: 'OGON', title: 'Огонь', sub: 'Жарко' },
-    diamond: { icon: 'ALMAZ', title: 'Алмаз', sub: 'Роскошь' },
-    rocket: { icon: 'RAKETA', title: 'Ракета', sub: 'Вперед' }
+    rose: { icon: '🌹', title: 'Роза', sub: 'Романтика' },
+    heart: { icon: '❤️', title: 'Сердце', sub: 'Любовь' },
+    star: { icon: '⭐', title: 'Звезда', sub: 'Восхищение' },
+    crown: { icon: '👑', title: 'Корона', sub: 'Король' },
+    trophy: { icon: '🏆', title: 'Кубок', sub: 'Победа' },
+    fire: { icon: '🔥', title: 'Огонь', sub: 'Жарко' },
+    diamond: { icon: '💎', title: 'Алмаз', sub: 'Роскошь' },
+    rocket: { icon: '🚀', title: 'Ракета', sub: 'Вперед' }
   };
 
   const gift = giftMap[selectedGift];
@@ -1038,6 +1341,47 @@ $('#send-gift-btn').addEventListener('click', async () => {
 });
 
 /* ===================== SETTINGS ===================== */
+$('#edit-profile-btn').addEventListener('click', () => {
+  $('#edit-display-name').value = currentUser.display_name || '';
+  $('#edit-bio').value = currentUser.bio || '';
+  $('#edit-avatar-preview').textContent = initials(currentUser.display_name || currentUser.username);
+  toggleVisibility('#edit-profile-modal', true);
+});
+
+$('#close-edit-profile').addEventListener('click', () => {
+  toggleVisibility('#edit-profile-modal', false);
+});
+
+$('#edit-display-name').addEventListener('input', (e) => {
+  $('#edit-avatar-preview').textContent = initials(e.target.value.trim() || currentUser.username);
+});
+
+$('#save-profile-btn').addEventListener('click', async () => {
+  const name = $('#edit-display-name').value.trim();
+  const bio = $('#edit-bio').value.trim();
+
+  if (!name) {
+    showToast('Имя не может быть пустым', 'warn');
+    return;
+  }
+
+  const { error } = await supabase
+    .from('profiles')
+    .update({ display_name: name, bio })
+    .eq('id', currentUser.id);
+
+  if (error) {
+    showToast('Ошибка сохранения профиля', 'err');
+    return;
+  }
+
+  currentUser.display_name = name;
+  currentUser.bio = bio;
+  updateProfileUI();
+  toggleVisibility('#edit-profile-modal', false);
+  showToast('Профиль обновлён', 'ok');
+});
+
 $('#settings-btn').addEventListener('click', () => {
   toggleVisibility('#settings-modal', true);
 });
@@ -1059,9 +1403,34 @@ $('#privacy-online').addEventListener('change', async (e) => {
   await supabase.from('profiles').update({ status: e.target.checked ? 'online' : 'offline' }).eq('id', currentUser.id);
 });
 
+$('#privacy-username').addEventListener('change', async (e) => {
+  const { error } = await supabase.from('profiles').update({ searchable: e.target.checked }).eq('id', currentUser.id);
+  if (error) showToast('Ошибка сохранения', 'err');
+});
+
+$('#privacy-gifts').addEventListener('change', async (e) => {
+  const { error } = await supabase.from('profiles').update({ accept_gifts: e.target.checked }).eq('id', currentUser.id);
+  if (error) showToast('Ошибка сохранения', 'err');
+});
+
 $('#logout-btn').addEventListener('click', async () => {
   await supabase.auth.signOut();
   showToast('Вы вышли из аккаунта', 'inf');
+});
+
+$('#change-password-btn').addEventListener('click', async () => {
+  const newPass = prompt('Введите новый пароль (минимум 4 символа):');
+  if (!newPass) return;
+  if (newPass.length < 4) {
+    showToast('Пароль минимум 4 символа', 'warn');
+    return;
+  }
+  const { error } = await supabase.auth.updateUser({ password: newPass });
+  if (error) {
+    showToast('Ошибка смены пароля', 'err');
+  } else {
+    showToast('Пароль изменён', 'ok');
+  }
 });
 
 $('#delete-account-btn').addEventListener('click', () => {
@@ -1076,7 +1445,15 @@ $('#confirm-cancel').addEventListener('click', () => {
 
 $('#confirm-ok').addEventListener('click', async () => {
   toggleVisibility('#confirm-modal', false);
-  showToast('Удаление в разработке', 'inf');
+  if ($('#confirm-title').textContent.includes('аккаунт')) {
+    const { error } = await supabase.from('profiles').delete().eq('id', currentUser.id);
+    if (error) {
+      showToast('Ошибка удаления данных профиля', 'err');
+      return;
+    }
+    await supabase.auth.signOut();
+    showToast('Профиль удалён. Для полного удаления аккаунта обратитесь в поддержку.', 'inf');
+  }
 });
 
 /* ===================== CHAT MENU ===================== */
